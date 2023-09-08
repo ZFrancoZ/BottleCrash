@@ -43,8 +43,12 @@ public class Ball_Movement : MonoBehaviour
             else
             {
                 // Si no hay toques, establece la velocidad en cero en el eje X
-                Toca = false;
-                Rb.velocity = new Vector3(0, Rb.velocity.y, Rb.velocity.z);
+                //Toca = false;
+                //Rb.velocity = new Vector3(0, Rb.velocity.y, Rb.velocity.z);
+                if(Toca)
+                {
+                    Soltar();
+                }
             }
         }
         else
