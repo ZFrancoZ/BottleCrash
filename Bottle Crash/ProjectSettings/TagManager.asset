@@ -8,6 +8,10 @@ TagManager:
   - Rampa
   - Propulsor
   - Fin
+  - Limite
+  - Pelota
+  - Suelo
+  - Fin Camara
   layers:
   - Default
   - TransparentFX
