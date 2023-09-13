@@ -19,6 +19,7 @@ public class Ball_Movement : MonoBehaviour
     private bool Toca = false;
     public bool SeSolto = false;
     public bool PuedeTirar;
+    [SerializeField] private bool Paso_Rampa;
     [SerializeField] private bool Paso_Limites;
     [SerializeField] private float Velocidad_Reinicio;
 
@@ -38,9 +39,12 @@ public class Ball_Movement : MonoBehaviour
                 Paso_Limites = false;
                 ;
                 Coll.isTrigger = false;
-                //Coll.enabled = true;
+                Paso_Rampa = false;
                 Canvas_Menu.SetActive(true);
-                PuedeTirar = true;
+                if(GameManager.current.ObjetosADestruir > GameManager.current.ObjetosDestruidos)
+                {
+                    PuedeTirar = true;
+                }
             }
             else
             {
@@ -84,13 +88,22 @@ public class Ball_Movement : MonoBehaviour
             if(!Paso_Limites)
             {
                 Vector3 movimiento = (Vector3.forward * Velocidad_Movimiento * Time.deltaTime);
-                rb.AddForce(movimiento);
-                if (rb.velocity.x <= Velocidad_Minima)
+                //rb.AddForce(movimiento);
+                if (rb.velocity.magnitude <= Velocidad_Minima && Paso_Rampa)
                 {
-                    //   Reiniciar_Pelota();
+                    StartCoroutine(Espera(1.5f));
+                }
+                else
+                {
+                    rb.AddForce(movimiento);
                 }
             }
         }
+    }
+    IEnumerator Espera(float tiempo)
+    {
+        yield return new WaitForSeconds(tiempo);
+        Reiniciar_Pelota();
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -117,6 +130,7 @@ public class Ball_Movement : MonoBehaviour
             else
             {
                 Debug.Log("Activar");
+                //StartCoroutine(Activar_Seguimiento(0.4f));
                 Camara.SetActive(true);
                 camaraActivada = true;
             }
@@ -126,12 +140,23 @@ public class Ball_Movement : MonoBehaviour
             Reiniciar_Pelota();
         }
     }
+
+    IEnumerator Activar_Seguimiento(float tiempo)
+    {
+        yield return new WaitForSeconds(tiempo);
+        Camara.SetActive(true);
+        camaraActivada = true;
+    }
     private void OnTriggerExit(Collider other)
     {
         //Hace que no se aplique ninguna fuerza sobre terreno liso
         if (other.tag == "Rampa")
         {
             Velocidad_Movimiento = 0;
+            if(!Paso_Limites)
+            {
+                Paso_Rampa = true;
+            }
         }
 
         if (other.tag == "Propulsor")

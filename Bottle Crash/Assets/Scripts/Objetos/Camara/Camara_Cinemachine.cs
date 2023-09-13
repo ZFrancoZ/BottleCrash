@@ -6,13 +6,15 @@ using Cinemachine;
 public class Camara_Cinemachine : MonoBehaviour
 {
     public CinemachineVirtualCamera virtualCamera;
+    [SerializeField] private Transform [] Objetivo;
 
     private void Start()
     {
-        if (virtualCamera != null)
-        {
-            // Desactiva la rotación en el eje Y
-            virtualCamera.GetCinemachineComponent<CinemachineOrbitalTransposer>().m_XDamping = 0;
-        }
+    }
+
+    public void Cambiar_Objetivo(int objetivo)
+    {
+        Debug.Log(objetivo);
+        virtualCamera.Follow = Objetivo[objetivo];
     }
 }
