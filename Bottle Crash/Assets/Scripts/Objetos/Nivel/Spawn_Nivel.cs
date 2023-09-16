@@ -13,12 +13,12 @@ public class Spawn_Nivel : MonoBehaviour
 
     public void Spawn()
     {
-        int random = Random.Range(1, Objetivos.Length);
+        /*int random = Random.Range(1, Objetivos.Length);
         while (random == GameManager.current.NivelActual[0])
         {
             random = Random.Range(1, Objetivos.Length);
         }
         Instantiate(Objetivos[random], transform.position, Quaternion.identity);
-        GameManager.current.NivelActual[0] = random;
+        GameManager.current.NivelActual[0] = random;*/
     }
 }

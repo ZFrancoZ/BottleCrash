@@ -11,6 +11,7 @@ public class Ball_Movement : MonoBehaviour
     [SerializeField] private float Velocidad_Colocación;
     [SerializeField] private GameObject Camara;
     private bool camaraActivada = true;
+    [SerializeField] private Camara_Cinemachine CamaraCM;
     [SerializeField] private Transform Pos_Inicial;
 
     [SerializeField] private GameObject Canvas_Menu;
@@ -30,6 +31,7 @@ public class Ball_Movement : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        Debug.Log(rb.velocity);
         if(Paso_Limites)
         {
             if(Vector3.Distance(transform.position, Pos_Inicial.position) <0.3)
@@ -119,19 +121,23 @@ public class Ball_Movement : MonoBehaviour
             Velocidad_Movimiento = 90000;
         }
         //Desactiva la camara para que no siga la pelota
+
         if (other.CompareTag("Fin Camara"))
         {
             if (camaraActivada)
             {
                 Debug.Log("Desactivar");
-                Camara.SetActive(false);
+                //Camara.SetActive(false);
+                CamaraCM.Movimiento_Lento();
                 camaraActivada = false;
+                //CamaraCM.Cambiar_Objetivo(2);
             }
             else
             {
                 Debug.Log("Activar");
                 //StartCoroutine(Activar_Seguimiento(0.4f));
-                Camara.SetActive(true);
+                //Camara.SetActive(true);
+                CamaraCM.Cambiar_Objetivo(0);
                 camaraActivada = true;
             }
         }

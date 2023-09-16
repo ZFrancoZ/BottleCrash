@@ -25,7 +25,8 @@ public class Objeto_Nuevo : MonoBehaviour
         {
             YaEntro = true;
             GameManager.current.Sumar_Destruido();
-            Instantiate(Botella_Rota, transform.position, Quaternion.identity);
+            GameObject objetoInstanciado = Instantiate(Botella_Rota, transform.position, Quaternion.identity);
+            objetoInstanciado.transform.localScale = transform.localScale;
             Destroy(this.gameObject);
         }
     }

@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager current;
 
-    public int[] NivelActual; // 0 = Objetos a destruir , 1 = Obstaculos
+    //public int[] NivelActual; // 0 = Objetos a destruir , 1 = Obstaculos
     public Camara_Cinemachine Camara;
     public int Nivel;
     public float ObjetosADestruir;
