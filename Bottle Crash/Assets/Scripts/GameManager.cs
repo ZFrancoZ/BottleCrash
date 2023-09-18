@@ -14,6 +14,9 @@ public class GameManager : MonoBehaviour
     public float ObjetosADestruir;
     public float ObjetosDestruidos;
 
+    public Material MaterialBotella;
+    public Material_Random MatRandom;
+    
     public static event Action FinPartida;
 
     public GameObject Canvas_Nivel;
@@ -26,6 +29,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         current = this;
+        Material();
     }
     void Update()
     {
@@ -34,7 +38,10 @@ public class GameManager : MonoBehaviour
             BarraProgreso.value += VelocidadBarraProgreso * Time.deltaTime;
         }
     }
-    
+    public void Material()
+    {
+        MaterialBotella = MatRandom.Cambiar_Material();
+    }
     public void Sumar_Destruido()
     {
         ObjetosDestruidos++;
@@ -51,6 +58,7 @@ public class GameManager : MonoBehaviour
         ObjetosDestruidos = 0;
         Canvas_Nivel.SetActive(true);
         FinPartida.Invoke();
+        Material();
         Camara.Cambiar_Objetivo(1);
     }
 

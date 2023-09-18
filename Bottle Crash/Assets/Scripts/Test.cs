@@ -19,7 +19,7 @@ public class Test : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Botella")
+        if(other.CompareTag("Botella"))
         {
             can.SetActive(true);
         }

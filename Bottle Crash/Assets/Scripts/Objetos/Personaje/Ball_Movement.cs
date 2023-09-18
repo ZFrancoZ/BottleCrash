@@ -9,19 +9,20 @@ public class Ball_Movement : MonoBehaviour
     public float Velocidad_Movimiento;
     [SerializeField] private float Velocidad_Minima;
     [SerializeField] private float Velocidad_Colocación;
-    [SerializeField] private GameObject Camara;
     private bool camaraActivada = true;
     [SerializeField] private Camara_Cinemachine CamaraCM;
     [SerializeField] private Transform Pos_Inicial;
 
     [SerializeField] private GameObject Canvas_Menu;
 
+    [SerializeField] private TrailRenderer Trail;
+
     private Vector2 touchInicio;
     private bool Toca = false;
     public bool SeSolto = false;
     public bool PuedeTirar;
     [SerializeField] private bool Paso_Rampa;
-    [SerializeField] private bool Paso_Limites;
+    public bool Paso_Limites;
     [SerializeField] private float Velocidad_Reinicio;
 
     void Start()
@@ -31,7 +32,6 @@ public class Ball_Movement : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        Debug.Log(rb.velocity);
         if(Paso_Limites)
         {
             if(Vector3.Distance(transform.position, Pos_Inicial.position) <0.3)
@@ -39,7 +39,6 @@ public class Ball_Movement : MonoBehaviour
                 rb.velocity = Vector3.zero;
                 rb.angularVelocity = Vector3.zero;
                 Paso_Limites = false;
-                ;
                 Coll.isTrigger = false;
                 Paso_Rampa = false;
                 Canvas_Menu.SetActive(true);
@@ -105,17 +104,18 @@ public class Ball_Movement : MonoBehaviour
     IEnumerator Espera(float tiempo)
     {
         yield return new WaitForSeconds(tiempo);
+        Paso_Limites = true;
         Reiniciar_Pelota();
     }
     private void OnTriggerEnter(Collider other)
     {
         //Le agrega velocidad a la caida sobre la rampa
-        if(other.tag == "Rampa" && SeSolto)
+        if(other.CompareTag("Rampa") && SeSolto)
         {
             Velocidad_Movimiento = 11000;
         }
         //Hace que la pelota aumente su velocidad al saltar por el propulsor
-        if (other.tag == "Propulsor")
+        if (other.CompareTag("Propulsor"))
         {
             Debug.Log("Propulsor");
             Velocidad_Movimiento = 90000;
@@ -124,7 +124,7 @@ public class Ball_Movement : MonoBehaviour
 
         if (other.CompareTag("Fin Camara"))
         {
-            if (camaraActivada)
+            if (camaraActivada && !Paso_Limites)
             {
                 Debug.Log("Desactivar");
                 //Camara.SetActive(false);
@@ -141,22 +141,26 @@ public class Ball_Movement : MonoBehaviour
                 camaraActivada = true;
             }
         }
-        if (other.tag == "Limite")
+        if (other.CompareTag("Limite"))
         {
             Reiniciar_Pelota();
         }
     }
-
-    IEnumerator Activar_Seguimiento(float tiempo)
+    public void Cambiar_Color()
     {
+        StartCoroutine(Color_Rastro(1));
+    }
+    public IEnumerator Color_Rastro(float tiempo)
+    {
+
+        Trail.startColor = Color.green;
         yield return new WaitForSeconds(tiempo);
-        Camara.SetActive(true);
-        camaraActivada = true;
+        Trail.startColor = Color.white;
     }
     private void OnTriggerExit(Collider other)
     {
         //Hace que no se aplique ninguna fuerza sobre terreno liso
-        if (other.tag == "Rampa")
+        if (other.CompareTag("Rampa"))
         {
             Velocidad_Movimiento = 0;
             if(!Paso_Limites)
@@ -165,7 +169,7 @@ public class Ball_Movement : MonoBehaviour
             }
         }
 
-        if (other.tag == "Propulsor")
+        if (other.CompareTag("Propulsor"))
         {
             Velocidad_Movimiento = 0;
         }
@@ -173,6 +177,7 @@ public class Ball_Movement : MonoBehaviour
 
     public void Reiniciar_Pelota()
     {
+        Trail.enabled = false;
         //Coll.enabled = false;
         Coll.isTrigger = true;
         rb.useGravity = false;
@@ -182,6 +187,8 @@ public class Ball_Movement : MonoBehaviour
     }
     public void Soltar()
     {
+        Trail.Clear();
+        Trail.enabled = true;
         PuedeTirar = false;
         SeSolto = true;
         rb.useGravity = true;

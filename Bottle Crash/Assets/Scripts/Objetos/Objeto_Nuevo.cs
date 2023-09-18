@@ -6,15 +6,16 @@ public class Objeto_Nuevo : MonoBehaviour
 {
     public GameObject Botella_Rota;
     private bool YaEntro;
-    private Renderer rend;
+    [SerializeField] private Renderer rend;
     private void Start()
     {
+        rend.material = GameManager.current.MaterialBotella;
         GameManager.current.ObjetosADestruir++;
         GameManager.current.BarraProgreso.maxValue = GameManager.current.ObjetosADestruir;
     }
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Suelo" || other.tag == "Limite" || other.tag == "Pelota")
+        if(other.CompareTag("Suelo") || other.CompareTag("Limite") || other.CompareTag("Pelota"))
         {
             Destruir();
         }

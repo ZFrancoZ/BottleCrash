@@ -30,8 +30,12 @@ public class Dedo_Tutorial : MonoBehaviour
     }
     private void Start()
     {
-        StartCoroutine(Play_Animacion());
         MoverDerecha();
+    }
+    private void OnEnable()
+    {
+        IndexSprite = 0;
+        StartCoroutine(Play_Animacion());
     }
     public void MoverDerecha()
     {

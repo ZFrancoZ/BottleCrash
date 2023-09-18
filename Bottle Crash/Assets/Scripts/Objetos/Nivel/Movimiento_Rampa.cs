@@ -4,10 +4,29 @@ using UnityEngine;
 
 public class Movimiento_Rampa : MonoBehaviour
 {
+    [SerializeField] private bool Mover;
     [SerializeField] private float Distancia;
     [SerializeField] private float Velocidad;
+    private Ball_Movement Pelota;
     private void Start()
     {
-        LeanTween.moveX(gameObject, Distancia, Velocidad).setEaseInSine().setLoopPingPong();
+        if(Mover)
+        {
+            LeanTween.moveX(gameObject, Distancia, Velocidad).setEaseInSine().setLoopPingPong();
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Pelota"))
+        {
+            if(Pelota == null)
+            {
+                Pelota = other.GetComponent<Ball_Movement>();
+            }
+            if(!Pelota.Paso_Limites)
+            {
+                Pelota.Cambiar_Color();
+            }  
+        }
     }
 }
