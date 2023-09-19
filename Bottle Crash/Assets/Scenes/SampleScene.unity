@@ -795,7 +795,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Camara: {fileID: 1368946026}
-  Nivel: 2
+  Nivel: 1
   ObjetosADestruir: 0
   ObjetosDestruidos: 0
   MaterialBotella: {fileID: 0}
@@ -3574,13 +3574,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1659251282}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.99999994, y: -0, z: -0, w: 0.00047586858}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 4.046, z: -6.23}
   m_LocalScale: {x: 0.47621703, y: 0.47621703, z: 0.47621703}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: -179.945, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!96 &1659251290
 TrailRenderer:
   serializedVersion: 3
