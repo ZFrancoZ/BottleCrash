@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public float ObjetosDestruidos;
 
     public Material MaterialBotella;
+    public Material MaterialSuperficie;
     public Material_Random MatRandom;
     
     public static event Action FinPartida;
@@ -40,7 +41,8 @@ public class GameManager : MonoBehaviour
     }
     public void Material()
     {
-        MaterialBotella = MatRandom.Cambiar_Material();
+        MaterialBotella = MatRandom.Cambiar_Material_Botella();
+        MaterialSuperficie = MatRandom.Cambiar_Material_Superficie();
     }
     public void Sumar_Destruido()
     {

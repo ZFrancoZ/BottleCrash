@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class Material_Random : MonoBehaviour
 {
-    public Material[] Materiales;
-
-    public Material Cambiar_Material()
+    public Material[] MaterialesBotellas;
+    public Material[] Materiales_Superficies;
+    public int random;
+    public Material Cambiar_Material_Botella()
     {
-        int random = Random.Range(0, Materiales.Length);
-        return Materiales[random];
+        random = Random.Range(0, MaterialesBotellas.Length);
+        return MaterialesBotellas[random];
     }
+    public Material Cambiar_Material_Superficie()
+    {
+        return Materiales_Superficies[random];
+    }
+
 }

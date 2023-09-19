@@ -24,6 +24,11 @@ public class Poderes : MonoBehaviour
                     LeanTween.color(gameObject, Color.blue, 1).setEaseOutSine();
                 }
                 break;
+            case 3:
+                {
+                    LeanTween.color(gameObject, Color.yellow, 1).setEaseOutSine();
+                }
+                break;
         }
     }
 

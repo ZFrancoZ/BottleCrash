@@ -7,6 +7,7 @@ public class Ball_Movement : MonoBehaviour
     private Collider Coll;
     private Rigidbody rb;
     public float Velocidad_Movimiento;
+    public float AlturaSalto;
     [SerializeField] private float Velocidad_Minima;
     [SerializeField] private float Velocidad_Colocación;
     private bool camaraActivada = true;
@@ -24,9 +25,13 @@ public class Ball_Movement : MonoBehaviour
     [SerializeField] private bool Paso_Rampa;
     public bool Paso_Limites;
     public bool EfectoVelocidad;
+    public bool Explota;
+    [SerializeField] private GameObject Explocion;
     [SerializeField] private float TiempoEfecto;
     [SerializeField] private float Velocidad_Reinicio;
-
+    [SerializeField] private bool Teletransportador;
+    [SerializeField] private Vector3 VelGuardada;
+    [SerializeField] private Vector3 VelAngularGuardada;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -59,7 +64,7 @@ public class Ball_Movement : MonoBehaviour
         {
             if (Input.touchCount > 0)
             {
-                //Canvas_Menu.SetActive(false);
+                Canvas_Menu.SetActive(false);
                 Touch touch = Input.GetTouch(0);
                 if (!Toca)
                 {
@@ -92,7 +97,7 @@ public class Ball_Movement : MonoBehaviour
             {
                 Vector3 movimiento = (Vector3.forward * Velocidad_Movimiento * Time.deltaTime);
                 //rb.AddForce(movimiento);
-                if (rb.velocity.magnitude <= Velocidad_Minima && Paso_Rampa)
+                if (rb.velocity.magnitude <= Velocidad_Minima && Paso_Rampa && !Teletransportador)
                 {
                     Paso_Limites = true;
                     StartCoroutine(Espera(1.5f));
@@ -116,6 +121,19 @@ public class Ball_Movement : MonoBehaviour
         if (other.CompareTag("Rampa") && SeSolto)
         {
             Velocidad_Movimiento = 11000;
+        }
+        //Le agrega velocidad a la caida sobre la rampa
+        if (other.CompareTag("Trampolin"))
+        {
+            rb.velocity = new Vector3(rb.velocity.x, AlturaSalto, rb.velocity.z);
+        }
+        if(other.CompareTag("Transportador"))
+        {
+            Teletransportador = true;
+            VelGuardada = rb.velocity;
+            VelAngularGuardada = rb.angularVelocity;
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
         }
         //Hace que la pelota aumente su velocidad al saltar por el propulsor
         if (other.CompareTag("Propulsor"))
@@ -151,27 +169,41 @@ public class Ball_Movement : MonoBehaviour
             {
                 case 1:
                     {
-                        StartCoroutine(Color_Rastro_Poder(1, Color.magenta));
+                        StartCoroutine(Color_Rastro(1, Color.magenta));
                         LeanTween.scale(gameObject, new Vector3(0.2f, 0.2f, 0.2f), 0.4f).setEaseOutSine();
                     }
                     break;
                 case 2:
                     {
-                        StartCoroutine(Color_Rastro_Poder(1, Color.blue));
+                        StartCoroutine(Color_Rastro(1, Color.blue));
                         LeanTween.scale(gameObject, new Vector3(1, 1, 1), 0.4f).setEaseOutSine();
+                    }
+                    break;
+                case 3:
+                    {
+                        Explota = true;
+                        StartCoroutine(Color_Rastro(1, Color.yellow));
                     }
                     break;
             }
         }
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(Explota)
+        {
+            Instantiate(Explocion, transform.position, Quaternion.identity);
+            Reiniciar_Pelota();
+        }
+    }
     public void Cambiar_Color()
     {
-        StartCoroutine(Color_Rastro(1));
+        StartCoroutine(Color_Rastro(1, Color.green));
     }
-    public IEnumerator Color_Rastro(float tiempo)
+    public IEnumerator Color_Rastro(float tiempo,Color color)
     {
 
-        Trail.startColor = Color.green;
+        Trail.startColor = color;
         yield return new WaitForSeconds(tiempo);
         Trail.startColor = Color.white;
     }
@@ -199,9 +231,14 @@ public class Ball_Movement : MonoBehaviour
             Velocidad_Movimiento = 0;
         }
     }
-
+    public void Seguir_Camino()
+    {
+        rb.velocity = VelGuardada;
+        rb.angularVelocity = VelAngularGuardada;
+    }
     public void Reiniciar_Pelota()
     {
+        Explota = false;
         Trail.enabled = false;
         Coll.isTrigger = true;
         rb.useGravity = false;

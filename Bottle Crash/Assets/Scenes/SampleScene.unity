@@ -795,10 +795,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Camara: {fileID: 1368946026}
-  Nivel: 6
+  Nivel: 2
   ObjetosADestruir: 0
   ObjetosDestruidos: 0
   MaterialBotella: {fileID: 0}
+  MaterialSuperficie: {fileID: 0}
   MatRandom: {fileID: 1864719693}
   Canvas_Nivel: {fileID: 777937222}
   Pelota: {fileID: 1659251283}
@@ -1580,6 +1581,7 @@ MonoBehaviour:
   - {fileID: 7527037485949266840, guid: 3f7f81e650de7ee4288d8fba4dca1f44, type: 3}
   - {fileID: 6910634536244315116, guid: aa09718ceb380b64fad1eb5cd5f8ed23, type: 3}
   - {fileID: 6557635775896211610, guid: 41eabe0b14234ac46ad9934e792a68b1, type: 3}
+  - {fileID: 2413035763143593314, guid: f4cd0d16c0dd4094f9c204e687bd405a, type: 3}
 --- !u!4 &728255446
 Transform:
   m_ObjectHideFlags: 0
@@ -3446,6 +3448,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Velocidad_Movimiento: 0
+  AlturaSalto: 14
   Velocidad_Minima: 1
   "Velocidad_Colocaci\xF3n": 0.5
   CamaraCM: {fileID: 1368946026}
@@ -3457,8 +3460,14 @@ MonoBehaviour:
   Paso_Rampa: 0
   Paso_Limites: 0
   EfectoVelocidad: 0
+  Explota: 0
+  Explocion: {fileID: 2674368350449400085, guid: f8ff6ded18e3b1342b7d6b9ef02b8f93,
+    type: 3}
   TiempoEfecto: 40
   Velocidad_Reinicio: 20
+  Teletransportador: 0
+  VelGuardada: {x: 0, y: 0, z: 0}
+  VelAngularGuardada: {x: 0, y: 0, z: 0}
 --- !u!54 &1659251285
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3947,15 +3956,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c1782ee3033782449b5faf02059b47b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Materiales:
-  - {fileID: 2100000, guid: 7c48ab03d54149d45a02222442f25c61, type: 2}
+  MaterialesBotellas:
   - {fileID: 2100000, guid: 5b19dcfdbbe112246ac06732711c053b, type: 2}
+  - {fileID: 2100000, guid: 6f9db6aa25e5050429cb77505cd7b323, type: 2}
+  - {fileID: 2100000, guid: 1c6bbee49273cb549ae2eba7ca656a45, type: 2}
+  - {fileID: 2100000, guid: 7c48ab03d54149d45a02222442f25c61, type: 2}
+  - {fileID: 2100000, guid: 52277e018d63efd498651655717bbf84, type: 2}
   - {fileID: 2100000, guid: ce2e72e3216f4b344b9ea76857ebc198, type: 2}
   - {fileID: 2100000, guid: 88df30b9c1461bb409e615d30a122ede, type: 2}
-  - {fileID: 2100000, guid: 1c6bbee49273cb549ae2eba7ca656a45, type: 2}
-  - {fileID: 2100000, guid: 6f9db6aa25e5050429cb77505cd7b323, type: 2}
   - {fileID: 2100000, guid: 07a9bd8f3cef0b844a73e438d9459464, type: 2}
-  - {fileID: 2100000, guid: 52277e018d63efd498651655717bbf84, type: 2}
+  Materiales_Superficies:
+  - {fileID: 2100000, guid: 58bae32d10560904486ee84533aa07dd, type: 2}
+  - {fileID: 2100000, guid: cc9859a9043ea844f8c517cb0d3ddbeb, type: 2}
+  - {fileID: 2100000, guid: 28f59cf01fd7a3d40b535d6436208b25, type: 2}
+  - {fileID: 2100000, guid: 3d7270fd85a47be48817fb622c3eee6f, type: 2}
+  - {fileID: 2100000, guid: a3fca7414938beb44a0e75aaa403e286, type: 2}
+  - {fileID: 2100000, guid: 60c77a891fd69ff41839d83c47470773, type: 2}
+  - {fileID: 2100000, guid: 110477add5d5dec45b683128961aa493, type: 2}
+  - {fileID: 2100000, guid: 450434a70c72e5c49ad8c52e8a650d60, type: 2}
+  random: 7
 --- !u!4 &1864719694
 Transform:
   m_ObjectHideFlags: 0
