@@ -12,6 +12,7 @@ TagManager:
   - Pelota
   - Suelo
   - Fin Camara
+  - Poder
   layers:
   - Default
   - TransparentFX

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1466441249222935983}
   - component: {fileID: 8549230360790161765}
+  - component: {fileID: 6397746344013017266}
   m_Layer: 0
   m_Name: Collider
   m_TagString: Untagged
@@ -51,8 +52,24 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.9069259, y: 0.3204758, z: 1}
-  m_Center: {x: -0.017082395, y: -0.1278601, z: 0.0000000049757376}
+  m_Size: {x: 0.9069259, y: 0.3204758, z: 0.4749385}
+  m_Center: {x: -0.017082391, y: -0.1278601, z: 0.21381256}
+--- !u!114 &6397746344013017266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8758387602197001904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8d26d21241b93542ac5ec3b891e383b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Objeto: {fileID: 8351847459643624309}
+  render: {fileID: 7559086862151789216}
+  material: {fileID: -8499701361930146817, guid: 9c31a759023c5d149b8fad11a16968fb,
+    type: 3}
 --- !u!1001 &9162240093875058212
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -140,6 +157,18 @@ PrefabInstance:
       addedObject: {fileID: 1466441249222935983}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c31a759023c5d149b8fad11a16968fb, type: 3}
+--- !u!23 &7559086862151789216 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 9c31a759023c5d149b8fad11a16968fb,
+    type: 3}
+  m_PrefabInstance: {fileID: 9162240093875058212}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8351847459643624309 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 9c31a759023c5d149b8fad11a16968fb,
+    type: 3}
+  m_PrefabInstance: {fileID: 9162240093875058212}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8695441181439349199 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9c31a759023c5d149b8fad11a16968fb,

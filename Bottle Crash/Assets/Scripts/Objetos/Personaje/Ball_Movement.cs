@@ -23,6 +23,8 @@ public class Ball_Movement : MonoBehaviour
     public bool PuedeTirar;
     [SerializeField] private bool Paso_Rampa;
     public bool Paso_Limites;
+    public bool EfectoVelocidad;
+    [SerializeField] private float TiempoEfecto;
     [SerializeField] private float Velocidad_Reinicio;
 
     void Start()
@@ -30,34 +32,34 @@ public class Ball_Movement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         Coll = GetComponent<Collider>();
     }
-    private void FixedUpdate()
+    private void Update()
     {
-        if(Paso_Limites)
+        if (EfectoVelocidad)
         {
-            if(Vector3.Distance(transform.position, Pos_Inicial.position) <0.3)
+            if (CamaraCM.CamaraVirtual.m_Lens.FieldOfView < 120)
             {
-                rb.velocity = Vector3.zero;
-                rb.angularVelocity = Vector3.zero;
-                Paso_Limites = false;
-                Coll.isTrigger = false;
-                Paso_Rampa = false;
-                Canvas_Menu.SetActive(true);
-                if(GameManager.current.ObjetosADestruir > GameManager.current.ObjetosDestruidos)
-                {
-                    PuedeTirar = true;
-                }
+                CamaraCM.CamaraVirtual.m_Lens.FieldOfView += TiempoEfecto * Time.deltaTime;
             }
             else
             {
-                float step = Velocidad_Reinicio * Time.deltaTime;
-                transform.position = Vector3.MoveTowards(transform.position, Pos_Inicial.position, step);
+                EfectoVelocidad = false;
             }
         }
-        if(!SeSolto && PuedeTirar)
+        else
+        {
+            if (CamaraCM.CamaraVirtual.m_Lens.FieldOfView > 105)
+            {
+                CamaraCM.CamaraVirtual.m_Lens.FieldOfView -= TiempoEfecto * Time.deltaTime;
+            }
+        }
+    }
+    private void FixedUpdate()
+    {
+        if (!SeSolto && PuedeTirar)
         {
             if (Input.touchCount > 0)
             {
-                Canvas_Menu.SetActive(false);
+                //Canvas_Menu.SetActive(false);
                 Touch touch = Input.GetTouch(0);
                 if (!Toca)
                 {
@@ -77,7 +79,7 @@ public class Ball_Movement : MonoBehaviour
             else
             {
                 // Si no hay toques, establece la velocidad en cero en el eje X
-                if(Toca)
+                if (Toca)
                 {
                     Toca = false;
                     Soltar();
@@ -86,12 +88,13 @@ public class Ball_Movement : MonoBehaviour
         }
         else
         {
-            if(!Paso_Limites)
+            if (!Paso_Limites)
             {
                 Vector3 movimiento = (Vector3.forward * Velocidad_Movimiento * Time.deltaTime);
                 //rb.AddForce(movimiento);
                 if (rb.velocity.magnitude <= Velocidad_Minima && Paso_Rampa)
                 {
+                    Paso_Limites = true;
                     StartCoroutine(Espera(1.5f));
                 }
                 else
@@ -104,19 +107,20 @@ public class Ball_Movement : MonoBehaviour
     IEnumerator Espera(float tiempo)
     {
         yield return new WaitForSeconds(tiempo);
-        Paso_Limites = true;
         Reiniciar_Pelota();
     }
     private void OnTriggerEnter(Collider other)
     {
+
         //Le agrega velocidad a la caida sobre la rampa
-        if(other.CompareTag("Rampa") && SeSolto)
+        if (other.CompareTag("Rampa") && SeSolto)
         {
             Velocidad_Movimiento = 11000;
         }
         //Hace que la pelota aumente su velocidad al saltar por el propulsor
         if (other.CompareTag("Propulsor"))
         {
+            EfectoVelocidad = true;
             Debug.Log("Propulsor");
             Velocidad_Movimiento = 90000;
         }
@@ -127,23 +131,37 @@ public class Ball_Movement : MonoBehaviour
             if (camaraActivada && !Paso_Limites)
             {
                 Debug.Log("Desactivar");
-                //Camara.SetActive(false);
                 CamaraCM.Movimiento_Lento();
                 camaraActivada = false;
-                //CamaraCM.Cambiar_Objetivo(2);
-            }
-            else
-            {
-                Debug.Log("Activar");
-                //StartCoroutine(Activar_Seguimiento(0.4f));
-                //Camara.SetActive(true);
-                CamaraCM.Cambiar_Objetivo(0);
-                camaraActivada = true;
             }
         }
         if (other.CompareTag("Limite"))
         {
             Reiniciar_Pelota();
+        }
+        if(other.CompareTag("Poder"))
+        {
+            Poderes power = other.GetComponent<Poderes>();
+            int poder = power.poder;
+            LeanTween.color(power.gameObject, Color.clear, 0.5f ).setEaseOutSine().setOnComplete(()=>
+            {
+                power.Reaparecer();
+            });
+            switch (poder)
+            {
+                case 1:
+                    {
+                        StartCoroutine(Color_Rastro_Poder(1, Color.magenta));
+                        LeanTween.scale(gameObject, new Vector3(0.2f, 0.2f, 0.2f), 0.4f).setEaseOutSine();
+                    }
+                    break;
+                case 2:
+                    {
+                        StartCoroutine(Color_Rastro_Poder(1, Color.blue));
+                        LeanTween.scale(gameObject, new Vector3(1, 1, 1), 0.4f).setEaseOutSine();
+                    }
+                    break;
+            }
         }
     }
     public void Cambiar_Color()
@@ -157,13 +175,20 @@ public class Ball_Movement : MonoBehaviour
         yield return new WaitForSeconds(tiempo);
         Trail.startColor = Color.white;
     }
+    public IEnumerator Color_Rastro_Poder(float tiempo, Color color)
+    {
+
+        Trail.startColor = color;
+        yield return new WaitForSeconds(tiempo);
+        Trail.startColor = Color.white;
+    }
     private void OnTriggerExit(Collider other)
     {
         //Hace que no se aplique ninguna fuerza sobre terreno liso
         if (other.CompareTag("Rampa"))
         {
             Velocidad_Movimiento = 0;
-            if(!Paso_Limites)
+            if (!Paso_Limites)
             {
                 Paso_Rampa = true;
             }
@@ -178,12 +203,33 @@ public class Ball_Movement : MonoBehaviour
     public void Reiniciar_Pelota()
     {
         Trail.enabled = false;
-        //Coll.enabled = false;
         Coll.isTrigger = true;
         rb.useGravity = false;
         SeSolto = false;
         Paso_Limites = true;
-        //Camara.SetActive(true);
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+        LeanTween.scale(gameObject, new Vector3(0, 0, 0), 0.5f).setEaseOutSine().setOnComplete(() =>
+        {
+            transform.position = new Vector3(0, 4.046f, -6.23f);
+            Invoke("Reponer_Pelota", (0f));
+        });
+    }
+    public void Reponer_Pelota()
+    {
+        CamaraCM.Cambiar_Objetivo(0);
+        camaraActivada = true;
+        LeanTween.scale(gameObject, new Vector3(0.476217f, 0.476217f, 0.476217f), 1.5f).setEaseOutSine().setOnComplete(() =>
+        {
+            Paso_Limites = false;
+            Coll.isTrigger = false;
+            Paso_Rampa = false;
+            Canvas_Menu.SetActive(true);
+            if (GameManager.current.ObjetosADestruir > GameManager.current.ObjetosDestruidos)
+            {
+                PuedeTirar = true;
+            }
+        });
     }
     public void Soltar()
     {
