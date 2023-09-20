@@ -1,27 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class Test : MonoBehaviour
 {
-    [SerializeField] private GameObject can;
-    // Start is called before the first frame update
-    void Start()
+
+    public TextMeshProUGUI textMesh;
+    private void Start()
     {
-        
+        textMesh = GetComponent<TextMeshProUGUI>();
+        InvokeRepeating(nameof(Calcular), 0, 1f);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Calcular()
     {
-        
-    }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.CompareTag("Botella"))
-        {
-            can.SetActive(true);
-        }
+        textMesh.text = (1f / Time.deltaTime).ToString();
     }
 }
+
