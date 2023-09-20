@@ -153,7 +153,7 @@ public class Ball_Movement : MonoBehaviour
                 camaraActivada = false;
             }
         }
-        if (other.CompareTag("Limite"))
+        if (other.CompareTag("Limite") || other.CompareTag("Limite_Final"))
         {
             Reiniciar_Pelota();
         }
@@ -161,7 +161,7 @@ public class Ball_Movement : MonoBehaviour
         {
             Poderes power = other.GetComponent<Poderes>();
             int poder = power.poder;
-            LeanTween.color(power.gameObject, Color.clear, 0.5f ).setEaseOutSine().setOnComplete(()=>
+            LeanTween.color(power.gameObject, new Color (0,0,0,0), 0.6f ).setEaseOutSine().setOnComplete(()=>
             {
                 power.Reaparecer();
             });
@@ -192,7 +192,7 @@ public class Ball_Movement : MonoBehaviour
     {
         if(Explota)
         {
-            Instantiate(Explocion, transform.position, Quaternion.identity);
+            Instantiate(Explocion, transform.position, Quaternion.Euler (-90,0,0));
             Reiniciar_Pelota();
         }
     }

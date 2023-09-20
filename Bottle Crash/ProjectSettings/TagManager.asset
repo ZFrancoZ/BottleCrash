@@ -15,6 +15,7 @@ TagManager:
   - Poder
   - Trampolin
   - Transportador
+  - Limite_Final
   layers:
   - Default
   - TransparentFX

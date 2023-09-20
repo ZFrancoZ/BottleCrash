@@ -5,31 +5,16 @@ using UnityEngine;
 public class Poderes : MonoBehaviour
 {
     public int poder;
+    private Color color;
     // Start is called before the first frame update
     void Start()
     {
+        color = GetComponent<Renderer>().material.color;
         LeanTween.scale(gameObject, new Vector3 (1.2f,1.2f,1.2f), 1).setEaseOutSine().setLoopPingPong();
     }
     public void Reaparecer()
     {
-        switch(poder)
-        {
-            case 1:
-                {
-                    LeanTween.color(gameObject, Color.magenta, 1).setEaseOutSine();
-                }
-                break;
-            case 2:
-                {
-                    LeanTween.color(gameObject, Color.blue, 1).setEaseOutSine();
-                }
-                break;
-            case 3:
-                {
-                    LeanTween.color(gameObject, Color.yellow, 1).setEaseOutSine();
-                }
-                break;
-        }
+        LeanTween.color(gameObject, color, 1).setEaseOutSine();
     }
 
     // Update is called once per frame

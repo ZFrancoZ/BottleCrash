@@ -686,7 +686,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Camara: {fileID: 1368946026}
-  Nivel: 1
+  Nivel: 3
   ObjetosADestruir: 0
   ObjetosDestruidos: 0
   MaterialBotella: {fileID: 0}
@@ -3248,7 +3248,7 @@ MonoBehaviour:
   Paso_Limites: 0
   EfectoVelocidad: 0
   Explota: 0
-  Explocion: {fileID: 2674368350449400085, guid: f8ff6ded18e3b1342b7d6b9ef02b8f93,
+  Explocion: {fileID: 1835734546730235920, guid: 53e54f8ff6961db48a4f68cd95c6f114,
     type: 3}
   TiempoEfecto: 40
   Velocidad_Reinicio: 20
