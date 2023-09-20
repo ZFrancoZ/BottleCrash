@@ -436,6 +436,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 1235863339}
+        m_TargetAssemblyTypeName: Script_Superficies, Assembly-CSharp
+        m_MethodName: Cambiar_Material
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &301828890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1696,7 +1708,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7245895102be55b4185b9919c87b58ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textMesh: {fileID: 0}
+  textMesh: {fileID: 887043808}
+  fpsLimit: 60
 --- !u!1 &912646628
 GameObject:
   m_ObjectHideFlags: 0
@@ -2078,6 +2091,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 2e05957c133706b448ab3445fee1b29b,
         type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 2e05957c133706b448ab3445fee1b29b,
+        type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 2e05957c133706b448ab3445fee1b29b,
+        type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 4319aa8e2a4fd6848bee80e291efdd27, type: 2}
@@ -2099,7 +2122,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 2e05957c133706b448ab3445fee1b29b,
         type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 2147483647
+      value: 126
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2113,6 +2136,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1235863335}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2e05957c133706b448ab3445fee1b29b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1235863339}
   m_SourcePrefab: {fileID: 100100000, guid: 2e05957c133706b448ab3445fee1b29b, type: 3}
 --- !u!1 &1051162387
 GameObject:
@@ -2306,6 +2333,25 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.55597496, y: 0.6395859, z: 0.5820578}
   m_Center: {x: 0, y: 0.041805413, z: 0.2864221}
+--- !u!23 &1235863336 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 2e05957c133706b448ab3445fee1b29b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1016625261}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1235863339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1235863327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8e16b0264f152b4e8b2dce262c3b626, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rend: {fileID: 1235863336}
 --- !u!1 &1316655467
 GameObject:
   m_ObjectHideFlags: 0

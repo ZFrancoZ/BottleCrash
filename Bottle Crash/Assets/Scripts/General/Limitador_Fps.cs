@@ -4,10 +4,16 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class Test : MonoBehaviour
+public class Limitador_Fps : MonoBehaviour
 {
 
     public TextMeshProUGUI textMesh;
+    [SerializeField] int fpsLimit;
+
+    private void Awake()
+    {
+        Application.targetFrameRate = fpsLimit;
+    }
     private void Start()
     {
         textMesh = GetComponent<TextMeshProUGUI>();
@@ -17,7 +23,7 @@ public class Test : MonoBehaviour
     public void Calcular()
     {
 
-        textMesh.text = (1f / Time.deltaTime).ToString();
+        textMesh.text = Mathf.Ceil(1f / Time.deltaTime).ToString();
     }
 }
 
