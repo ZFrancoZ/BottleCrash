@@ -10,7 +10,24 @@ public class Poderes : MonoBehaviour
     void Start()
     {
         color = GetComponent<Renderer>().material.color;
-        LeanTween.scale(gameObject, new Vector3 (1.2f,1.2f,1.2f), 1).setEaseOutSine().setLoopPingPong();
+        switch(poder)
+        {
+            case 1:
+                {
+                    LeanTween.scale(gameObject, new Vector3(0.7f, 0.7f, 0.7f), 2).setEaseOutCubic().setLoopPingPong();
+                }
+                break;
+            case 2:
+                {
+                    LeanTween.scale(gameObject, new Vector3(1.3f, 1.3f, 1.3f), 1).setEaseOutCubic().setLoopPingPong();
+                }
+                break;
+            case 3:
+                {
+                    LeanTween.scale(gameObject, new Vector3(1.2f, 1.2f, 1.2f), 1).setEaseOutSine().setLoopPingPong();
+                }
+                break;
+        }
     }
     public void Reaparecer()
     {

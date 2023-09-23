@@ -96,7 +96,6 @@ public class Ball_Movement : MonoBehaviour
             if (!Paso_Limites)
             {
                 Vector3 movimiento = (Vector3.forward * Velocidad_Movimiento * Time.deltaTime);
-                //rb.AddForce(movimiento);
                 if (rb.velocity.magnitude <= Velocidad_Minima && Paso_Rampa && !Teletransportador)
                 {
                     Paso_Limites = true;
@@ -170,13 +169,13 @@ public class Ball_Movement : MonoBehaviour
                 case 1:
                     {
                         StartCoroutine(Color_Rastro(1, Color.magenta));
-                        LeanTween.scale(gameObject, new Vector3(0.2f, 0.2f, 0.2f), 0.4f).setEaseOutSine();
+                        LeanTween.scale(gameObject, new Vector3(0.15f, 0.15f, 0.15f), 0.2f).setEaseOutSine();
                     }
                     break;
                 case 2:
                     {
                         StartCoroutine(Color_Rastro(1, Color.blue));
-                        LeanTween.scale(gameObject, new Vector3(1, 1, 1), 0.4f).setEaseOutSine();
+                        LeanTween.scale(gameObject, new Vector3(1, 1, 1), 0.2f).setEaseOutSine();
                     }
                     break;
                 case 3:
@@ -256,7 +255,7 @@ public class Ball_Movement : MonoBehaviour
     {
         CamaraCM.Cambiar_Objetivo(0);
         camaraActivada = true;
-        LeanTween.scale(gameObject, new Vector3(0.476217f, 0.476217f, 0.476217f), 1.5f).setEaseOutSine().setOnComplete(() =>
+        LeanTween.scale(gameObject, new Vector3(0.5f, 0.5f, 0.5f), 1.5f).setEaseOutSine().setOnComplete(() =>
         {
             Paso_Limites = false;
             Coll.isTrigger = false;

@@ -11,7 +11,6 @@ public class Objeto_Nuevo : MonoBehaviour
     {
         rend.material = GameManager.current.MaterialBotella;
         GameManager.current.ObjetosADestruir++;
-        GameManager.current.BarraProgreso.maxValue = GameManager.current.ObjetosADestruir;
     }
     private void OnTriggerEnter(Collider other)
     {

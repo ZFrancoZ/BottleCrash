@@ -5,7 +5,6 @@ using UnityEngine;
 public class Spawn_Escenario : MonoBehaviour
 {
     public GameObject[] Escenario;
-    // Start is called before the first frame update
     void Start()
     {
         Spawn();
@@ -13,15 +12,10 @@ public class Spawn_Escenario : MonoBehaviour
 
     public void Spawn()
     {
-        /*int random = Random.Range(1, Obstaculos.Length);
-        while (random == GameManager.current.NivelActual[1])
-        {
-            random = Random.Range(1, Obstaculos.Length);
-        }*/
         int nivel = GameManager.current.Nivel;
-        Quaternion rotacionActual = Escenario[nivel].transform.rotation;
-        Vector3 posicion = Escenario[nivel].transform.position;
-        Instantiate(Escenario[nivel], posicion, rotacionActual);
-        //GameManager.current.NivelActual[1] = random;
+        int indiceEscenario = (nivel - 1) % Escenario.Length + 1; // Calcula el índice y suma 1
+        Quaternion rotacionActual = Escenario[indiceEscenario - 1].transform.rotation; // Resta 1 para acceder al elemento correcto
+        Vector3 posicion = Escenario[indiceEscenario - 1].transform.position; // Resta 1 para acceder al elemento correcto
+        Instantiate(Escenario[indiceEscenario - 1], posicion, rotacionActual); // Resta 1 para acceder al elemento correcto
     }
 }

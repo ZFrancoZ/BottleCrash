@@ -8,7 +8,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager current;
 
-    //public int[] NivelActual; // 0 = Objetos a destruir , 1 = Obstaculos
     public Camara_Cinemachine Camara;
     public int Nivel;
     public float ObjetosADestruir;
@@ -24,8 +23,8 @@ public class GameManager : MonoBehaviour
 
     public Ball_Movement Pelota;
 
-    public Slider BarraProgreso;
     public float VelocidadBarraProgreso;
+    public Image BarraProgresoNivel;
 
     private void Awake()
     {
@@ -34,15 +33,18 @@ public class GameManager : MonoBehaviour
     }
     void Update()
     {
-        if(BarraProgreso.value <= ObjetosDestruidos)
+        float progreso = ObjetosDestruidos / ObjetosADestruir;
+        Debug.Log(progreso);
+        if(BarraProgresoNivel.fillAmount < progreso)
         {
-            BarraProgreso.value += VelocidadBarraProgreso * Time.deltaTime;
+            BarraProgresoNivel.fillAmount += VelocidadBarraProgreso;
         }
     }
     public void Material()
     {
         MaterialBotella = MatRandom.Cambiar_Material_Botella();
         MaterialSuperficie = MatRandom.Cambiar_Material_Superficie();
+        BarraProgresoNivel.color = MaterialBotella.color;
     }
     public void Sumar_Destruido()
     {
@@ -58,6 +60,7 @@ public class GameManager : MonoBehaviour
     {
         ObjetosADestruir = 0;
         ObjetosDestruidos = 0;
+        BarraProgresoNivel.fillAmount = 0;
         Canvas_Nivel.SetActive(true);
         FinPartida.Invoke();
         Material();

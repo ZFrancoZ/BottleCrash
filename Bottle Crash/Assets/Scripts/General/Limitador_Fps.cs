@@ -23,7 +23,7 @@ public class Limitador_Fps : MonoBehaviour
     public void Calcular()
     {
 
-        textMesh.text = Mathf.Ceil(1f / Time.deltaTime).ToString();
+        textMesh.text ="FPS:"+ Mathf.Ceil(1f / Time.deltaTime).ToString();
     }
 }
 

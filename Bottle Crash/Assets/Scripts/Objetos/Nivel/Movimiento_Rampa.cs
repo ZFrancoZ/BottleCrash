@@ -12,7 +12,7 @@ public class Movimiento_Rampa : MonoBehaviour
     {
         if(Mover)
         {
-            LeanTween.moveX(gameObject, Distancia, Velocidad).setEaseInSine().setLoopPingPong();
+            LeanTween.moveX(gameObject, Distancia, Velocidad).setEaseInOutSine().setLoopPingPong();
         }
     }
     private void OnTriggerEnter(Collider other)
