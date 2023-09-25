@@ -15,7 +15,6 @@ public class Camara_Cinemachine : MonoBehaviour
     [SerializeField] private float FactorDesaceleracion;
     public void Cambiar_Objetivo(int objetivo)
     {
-        Debug.Log(objetivo);
         CamaraVirtual.Follow = Objetivo[objetivo];
     }
     public void Movimiento_Lento()

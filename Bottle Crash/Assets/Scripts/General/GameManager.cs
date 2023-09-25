@@ -22,9 +22,11 @@ public class GameManager : MonoBehaviour
     public GameObject Canvas_Nivel;
 
     public Ball_Movement Pelota;
+    public bool HizoPrimerTiro;
 
     public float VelocidadBarraProgreso;
     public Image BarraProgresoNivel;
+
 
     private void Awake()
     {
@@ -54,7 +56,7 @@ public class GameManager : MonoBehaviour
         ObjetosDestruidos++;
         if(ObjetosDestruidos == ObjetosADestruir)
         {
-            Pelota.PuedeTirar = false;
+            //Pelota.PuedeTirar = false;
             Nivel++;
             Invoke("Nivel_Completado", 2f);
         }
@@ -63,20 +65,12 @@ public class GameManager : MonoBehaviour
     {
         ObjetosADestruir = 0;
         ObjetosDestruidos = 0;
+        Pelota.Desaparecer_Pelota();
         BarraProgresoNivel.fillAmount = 0;
         Canvas_Nivel.SetActive(true);
         FinPartida.Invoke();
         Material();
         Camara.Cambiar_Objetivo(1);
-    }
-
-    public void Habilitar_Pelota(float tiempo)
-    {
-        StartCoroutine(HabilitarPelota(tiempo));
-    }
-    public IEnumerator HabilitarPelota(float tiempo)
-    {
-        yield return new WaitForSeconds(tiempo);
-        Pelota.PuedeTirar = true;
+        HizoPrimerTiro = false;
     }
 }

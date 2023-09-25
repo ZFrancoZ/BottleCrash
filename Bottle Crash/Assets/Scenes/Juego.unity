@@ -244,6 +244,53 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1766867078}
   m_SourcePrefab: {fileID: 100100000, guid: 2e05957c133706b448ab3445fee1b29b, type: 3}
+--- !u!1 &92954677
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 92954679}
+  - component: {fileID: 92954678}
+  m_Layer: 0
+  m_Name: Controlador_Botellas
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &92954678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 92954677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8985cc22fd3f98f4180b2f7df0d7ea3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BotellasMoviendose: 0
+  tiempoTranscurrido: 0
+  Pelota: {fileID: 1659251283}
+--- !u!4 &92954679
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 92954677}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.72804105, y: 0.8809537, z: -1.9478747}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &214445145
 GameObject:
   m_ObjectHideFlags: 0
@@ -497,18 +544,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 405826688}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: Habilitar_Pelota
-        m_Mode: 4
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0.5
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
       - m_Target: {fileID: 728255445}
         m_TargetAssemblyTypeName: Spawn_Obstaculos, Assembly-CSharp
         m_MethodName: Spawn
@@ -548,6 +583,18 @@ MonoBehaviour:
       - m_Target: {fileID: 2029792419}
         m_TargetAssemblyTypeName: Script_Superficies, Assembly-CSharp
         m_MethodName: Cambiar_Material
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1659251283}
+        m_TargetAssemblyTypeName: Ball_Movement, Assembly-CSharp
+        m_MethodName: Aparecer_Pelota
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -720,7 +767,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Camara: {fileID: 1368946026}
-  Nivel: 1
+  Nivel: 5
   ObjetosADestruir: 0
   ObjetosDestruidos: 0
   MaterialBotella: {fileID: 0}
@@ -728,6 +775,7 @@ MonoBehaviour:
   MatRandom: {fileID: 1864719693}
   Canvas_Nivel: {fileID: 777937222}
   Pelota: {fileID: 1659251283}
+  HizoPrimerTiro: 0
   VelocidadBarraProgreso: 1.5
   BarraProgresoNivel: {fileID: 889711727}
 --- !u!4 &405826689
@@ -1309,7 +1357,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &775251076
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2930,16 +2978,16 @@ MonoBehaviour:
   Pos_Inicial: {fileID: 1051162388}
   Canvas_Menu: {fileID: 775251075}
   Trail: {fileID: 1659251290}
-  SeSolto: 0
-  PuedeTirar: 1
+  Toca: 0
+  PuedeTirar: 0
+  EstaLaPelota: 0
   Paso_Rampa: 0
-  Paso_Limites: 0
   EfectoVelocidad: 0
   Explota: 0
+  Desaparecio: 0
   Explocion: {fileID: 1835734546730235920, guid: 53e54f8ff6961db48a4f68cd95c6f114,
     type: 3}
   TiempoEfecto: 40
-  Velocidad_Reinicio: 20
   Teletransportador: 0
   VelGuardada: {x: 0, y: 0, z: 0}
   VelAngularGuardada: {x: 0, y: 0, z: 0}
@@ -3051,7 +3099,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 4.046, z: -6.23}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -4081,3 +4129,4 @@ SceneRoots:
   - {fileID: 728255446}
   - {fileID: 1864719694}
   - {fileID: 1434023043}
+  - {fileID: 92954679}

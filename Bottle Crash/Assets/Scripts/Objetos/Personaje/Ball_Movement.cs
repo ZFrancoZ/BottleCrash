@@ -19,16 +19,15 @@ public class Ball_Movement : MonoBehaviour
     [SerializeField] private TrailRenderer Trail;
 
     private Vector2 touchInicio;
-    private bool Toca = false;
-    public bool SeSolto = false;
+    [SerializeField] private bool Toca = false;
     public bool PuedeTirar;
+    public bool EstaLaPelota;
     [SerializeField] private bool Paso_Rampa;
-    public bool Paso_Limites;
     public bool EfectoVelocidad;
     public bool Explota;
+    public bool Desaparecio;
     [SerializeField] private GameObject Explocion;
     [SerializeField] private float TiempoEfecto;
-    [SerializeField] private float Velocidad_Reinicio;
     [SerializeField] private bool Teletransportador;
     [SerializeField] private Vector3 VelGuardada;
     [SerializeField] private Vector3 VelAngularGuardada;
@@ -36,6 +35,7 @@ public class Ball_Movement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         Coll = GetComponent<Collider>();
+        Aparecer_Pelota();
     }
     private void Update()
     {
@@ -60,7 +60,7 @@ public class Ball_Movement : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (!SeSolto && PuedeTirar)
+        if (PuedeTirar)
         {
             if (Input.touchCount > 0)
             {
@@ -93,31 +93,26 @@ public class Ball_Movement : MonoBehaviour
         }
         else
         {
-            if (!Paso_Limites)
-            {
+            //if (Paso_Rampa)
+            //{
                 Vector3 movimiento = (Vector3.forward * Velocidad_Movimiento * Time.deltaTime);
                 if (rb.velocity.magnitude <= Velocidad_Minima && Paso_Rampa && !Teletransportador)
                 {
-                    Paso_Limites = true;
-                    StartCoroutine(Espera(1.5f));
+                    Invoke("Desaparecer_Pelota", 0.2f);
+                    //Desaparecer_Pelota();
                 }
                 else
                 {
                     rb.AddForce(movimiento);
                 }
-            }
+            //}
         }
-    }
-    IEnumerator Espera(float tiempo)
-    {
-        yield return new WaitForSeconds(tiempo);
-        Reiniciar_Pelota();
     }
     private void OnTriggerEnter(Collider other)
     {
 
         //Le agrega velocidad a la caida sobre la rampa
-        if (other.CompareTag("Rampa") && SeSolto)
+        if (other.CompareTag("Rampa") /*&& SeSolto*/)
         {
             Velocidad_Movimiento = 11000;
         }
@@ -138,23 +133,21 @@ public class Ball_Movement : MonoBehaviour
         if (other.CompareTag("Propulsor"))
         {
             EfectoVelocidad = true;
-            Debug.Log("Propulsor");
             Velocidad_Movimiento = 90000;
         }
         //Desactiva la camara para que no siga la pelota
 
         if (other.CompareTag("Fin Camara"))
         {
-            if (camaraActivada && !Paso_Limites)
+            if (camaraActivada)
             {
-                Debug.Log("Desactivar");
                 CamaraCM.Movimiento_Lento();
                 camaraActivada = false;
             }
         }
         if (other.CompareTag("Limite") || other.CompareTag("Limite_Final"))
         {
-            Reiniciar_Pelota();
+            Desaparecer_Pelota();
         }
         if(other.CompareTag("Poder"))
         {
@@ -192,7 +185,9 @@ public class Ball_Movement : MonoBehaviour
         if(Explota)
         {
             Instantiate(Explocion, transform.position, Quaternion.Euler (-90,0,0));
-            Reiniciar_Pelota();
+            Explota = false;
+            Coll.isTrigger = true;
+            Desaparecer_Pelota();
         }
     }
     public void Cambiar_Color()
@@ -219,10 +214,7 @@ public class Ball_Movement : MonoBehaviour
         if (other.CompareTag("Rampa"))
         {
             Velocidad_Movimiento = 0;
-            if (!Paso_Limites)
-            {
-                Paso_Rampa = true;
-            }
+            Paso_Rampa = true;
         }
 
         if (other.CompareTag("Propulsor"))
@@ -234,45 +226,62 @@ public class Ball_Movement : MonoBehaviour
     {
         rb.velocity = VelGuardada;
         rb.angularVelocity = VelAngularGuardada;
+        Teletransportador = false;
     }
-    public void Reiniciar_Pelota()
+    public void Desaparecer_Pelota()
     {
-        Explota = false;
-        Trail.enabled = false;
-        Coll.isTrigger = true;
-        rb.useGravity = false;
-        SeSolto = false;
-        Paso_Limites = true;
-        rb.velocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
-        LeanTween.scale(gameObject, new Vector3(0, 0, 0), 0.5f).setEaseOutSine().setOnComplete(() =>
+        if(!Desaparecio)
         {
-            transform.position = new Vector3(0, 4.046f, -6.23f);
-            Invoke("Reponer_Pelota", (0f));
-        });
-    }
-    public void Reponer_Pelota()
-    {
-        CamaraCM.Cambiar_Objetivo(0);
-        camaraActivada = true;
-        LeanTween.scale(gameObject, new Vector3(0.5f, 0.5f, 0.5f), 1.5f).setEaseOutSine().setOnComplete(() =>
-        {
-            Paso_Limites = false;
-            Coll.isTrigger = false;
-            Paso_Rampa = false;
-            Canvas_Menu.SetActive(true);
-            if (GameManager.current.ObjetosADestruir > GameManager.current.ObjetosDestruidos)
+            Desaparecio = true;
+            Debug.Log("Desaparecer");
+            Trail.enabled = false;
+            rb.useGravity = false;
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            LeanTween.scale(gameObject, new Vector3(0, 0, 0), 0.5f).setEaseOutSine().setOnComplete(() =>
             {
-                PuedeTirar = true;
+                transform.position = new Vector3(0, 4.046f, -6.23f);
+                if (Controlador_Botellas.current.BotellasMoviendose < 1)
+                {
+                    if(GameManager.current.ObjetosADestruir > GameManager.current.ObjetosDestruidos)
+                    {
+                        Aparecer_Pelota();
+                    }
+                }
+            });
+        }
+    }
+    public void Aparecer_Pelota()
+    {
+        if (GameManager.current.ObjetosADestruir > GameManager.current.ObjetosDestruidos || GameManager.current.ObjetosADestruir == 0)
+        {
+            if (!EstaLaPelota)
+            {
+                Debug.Log("Aparecer");
+                EstaLaPelota = true;
+                CamaraCM.Cambiar_Objetivo(0);
+                camaraActivada = true;
+                Coll.isTrigger = false;
+                Paso_Rampa = false;
+                LeanTween.scale(gameObject, new Vector3(0.5f, 0.5f, 0.5f), 1.5f).setEaseOutSine().setOnComplete(() =>
+                {
+                    Canvas_Menu.SetActive(true);
+                    PuedeTirar = true;
+                    Desaparecio = false;
+                });
             }
-        });
+        }
     }
     public void Soltar()
     {
+        PuedeTirar = false;
+        if (!GameManager.current.HizoPrimerTiro)
+        {
+            GameManager.current.HizoPrimerTiro = true;
+        }
+        EstaLaPelota = false;
         Trail.Clear();
         Trail.enabled = true;
-        PuedeTirar = false;
-        SeSolto = true;
         rb.useGravity = true;
     }
 }

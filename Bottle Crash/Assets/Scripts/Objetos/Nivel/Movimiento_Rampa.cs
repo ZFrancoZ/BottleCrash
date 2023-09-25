@@ -23,10 +23,7 @@ public class Movimiento_Rampa : MonoBehaviour
             {
                 Pelota = other.GetComponent<Ball_Movement>();
             }
-            if(!Pelota.Paso_Limites)
-            {
-                Pelota.Cambiar_Color();
-            }  
+            Pelota.Cambiar_Color();
         }
     }
 }

@@ -512,6 +512,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5249360736912491863, guid: dfeaa2c4053bd7242b6d5df32eeac01c,
+        type: 3}
+      propertyPath: ControlarMovimiento
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7617701017825125399, guid: dfeaa2c4053bd7242b6d5df32eeac01c,
         type: 3}
       propertyPath: m_Mass
@@ -787,6 +792,11 @@ PrefabInstance:
     - target: {fileID: 846476596236835904, guid: dfeaa2c4053bd7242b6d5df32eeac01c,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5249360736912491863, guid: dfeaa2c4053bd7242b6d5df32eeac01c,
+        type: 3}
+      propertyPath: ControlarMovimiento
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7617701017825125399, guid: dfeaa2c4053bd7242b6d5df32eeac01c,
@@ -1400,6 +1410,11 @@ PrefabInstance:
     - target: {fileID: 846476596236835904, guid: dfeaa2c4053bd7242b6d5df32eeac01c,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5249360736912491863, guid: dfeaa2c4053bd7242b6d5df32eeac01c,
+        type: 3}
+      propertyPath: ControlarMovimiento
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7617701017825125399, guid: dfeaa2c4053bd7242b6d5df32eeac01c,
@@ -2072,6 +2087,11 @@ PrefabInstance:
     - target: {fileID: 846476596236835904, guid: dfeaa2c4053bd7242b6d5df32eeac01c,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5249360736912491863, guid: dfeaa2c4053bd7242b6d5df32eeac01c,
+        type: 3}
+      propertyPath: ControlarMovimiento
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7617701017825125399, guid: dfeaa2c4053bd7242b6d5df32eeac01c,
@@ -2952,6 +2972,11 @@ PrefabInstance:
     - target: {fileID: 846476596236835904, guid: dfeaa2c4053bd7242b6d5df32eeac01c,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5249360736912491863, guid: dfeaa2c4053bd7242b6d5df32eeac01c,
+        type: 3}
+      propertyPath: ControlarMovimiento
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7617701017825125399, guid: dfeaa2c4053bd7242b6d5df32eeac01c,

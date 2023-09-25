@@ -7,10 +7,14 @@ public class Objeto_Nuevo : MonoBehaviour
     public GameObject Botella_Rota;
     private bool YaEntro;
     [SerializeField] private Renderer rend;
+    [SerializeField] private Rigidbody Rb;
+    private bool BotellasEnMovimiento;
+    [SerializeField] private bool ControlarMovimiento;
     private void Start()
     {
         rend.material = GameManager.current.MaterialBotella;
         GameManager.current.ObjetosADestruir++;
+        Rb = GetComponent<Rigidbody>();
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -19,14 +23,41 @@ public class Objeto_Nuevo : MonoBehaviour
             Destruir();
         }
     }
+    private void FixedUpdate()
+    {
+        if(ControlarMovimiento)
+        {
+            if (Rb.velocity.magnitude > 0.1f)
+            {
+                if (!BotellasEnMovimiento)
+                {
+                    Controlador_Botellas.current.BotellasMoviendose++;
+                    BotellasEnMovimiento = true;
+                }
+            }
+            else
+            {
+                if (BotellasEnMovimiento)
+                {
+                    Controlador_Botellas.current.BotellasMoviendose--;
+                    BotellasEnMovimiento = false;
+                }
+            }
+        }
+    }
     private void Destruir()
     {
         if(!YaEntro)
         {
             YaEntro = true;
             GameManager.current.Sumar_Destruido();
+            /*if (BotellasEnMovimiento)
+            {
+                Controlador_Botellas.current.BotellasMoviendose--;
+            }*/
             GameObject objetoInstanciado = Instantiate(Botella_Rota, transform.position, Quaternion.identity);
             objetoInstanciado.transform.localScale = transform.localScale;
+            objetoInstanciado.GetComponent<Desaparecer>().BotellasEnMovimiento = BotellasEnMovimiento;
             Destroy(this.gameObject);
         }
     }

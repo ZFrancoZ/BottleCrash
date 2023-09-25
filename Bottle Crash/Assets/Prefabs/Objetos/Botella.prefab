@@ -108,10 +108,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 7345943556732860389}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 42effcfa18606a945a6cc84340d408b5,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2040387513184976896}
   m_SourcePrefab: {fileID: 100100000, guid: 42effcfa18606a945a6cc84340d408b5, type: 3}
 --- !u!1 &68848489631614714 stripped
 GameObject:
@@ -182,6 +178,8 @@ MonoBehaviour:
   Botella_Rota: {fileID: 4670445530992411090, guid: 94e48de40af2b9740970fedfc00947f1,
     type: 3}
   rend: {fileID: 2014346147518162735}
+  Rb: {fileID: 0}
+  ControlarMovimiento: 1
 --- !u!65 &7345943556732860389
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -203,29 +201,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.18, y: 0.18, z: 0.22}
   m_Center: {x: 0, y: 0.00000023841858, z: 0.16}
---- !u!136 &2040387513184976896
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 68848489631614714}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 0.079420686
-  m_Height: 0.26306802
-  m_Direction: 2
-  m_Center: {x: -0.0011718369, y: 1.8469085e-12, z: 0.13179256}
 --- !u!23 &2014346147518162735 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 42effcfa18606a945a6cc84340d408b5,
