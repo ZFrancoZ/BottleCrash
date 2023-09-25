@@ -33,11 +33,14 @@ public class GameManager : MonoBehaviour
     }
     void Update()
     {
+        Barra_Progreso();
+    }
+    public void Barra_Progreso()
+    {
         float progreso = ObjetosDestruidos / ObjetosADestruir;
-        Debug.Log(progreso);
-        if(BarraProgresoNivel.fillAmount < progreso)
+        if (BarraProgresoNivel.fillAmount < progreso)
         {
-            BarraProgresoNivel.fillAmount += VelocidadBarraProgreso;
+            BarraProgresoNivel.fillAmount += VelocidadBarraProgreso * Time.deltaTime;
         }
     }
     public void Material()

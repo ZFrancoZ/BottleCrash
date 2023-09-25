@@ -728,7 +728,7 @@ MonoBehaviour:
   MatRandom: {fileID: 1864719693}
   Canvas_Nivel: {fileID: 777937222}
   Pelota: {fileID: 1659251283}
-  VelocidadBarraProgreso: 0.005
+  VelocidadBarraProgreso: 1.5
   BarraProgresoNivel: {fileID: 889711727}
 --- !u!4 &405826689
 Transform:
@@ -3966,7 +3966,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_BindingMode: 4
   m_FollowOffset: {x: 0, y: 1.28, z: -1}
-  m_XDamping: 2
+  m_XDamping: 1
   m_YDamping: 2
   m_ZDamping: 2
   m_AngularDampingMode: 0
