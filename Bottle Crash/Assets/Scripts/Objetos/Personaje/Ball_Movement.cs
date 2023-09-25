@@ -37,27 +37,7 @@ public class Ball_Movement : MonoBehaviour
         Coll = GetComponent<Collider>();
         Aparecer_Pelota();
     }
-    private void Update()
-    {
-        if (EfectoVelocidad)
-        {
-            if (CamaraCM.CamaraVirtual.m_Lens.FieldOfView < 120)
-            {
-                CamaraCM.CamaraVirtual.m_Lens.FieldOfView += TiempoEfecto * Time.deltaTime;
-            }
-            else
-            {
-                EfectoVelocidad = false;
-            }
-        }
-        else
-        {
-            if (CamaraCM.CamaraVirtual.m_Lens.FieldOfView > 105)
-            {
-                CamaraCM.CamaraVirtual.m_Lens.FieldOfView -= TiempoEfecto * Time.deltaTime;
-            }
-        }
-    }
+
     private void FixedUpdate()
     {
         if (PuedeTirar)
@@ -132,7 +112,7 @@ public class Ball_Movement : MonoBehaviour
         //Hace que la pelota aumente su velocidad al saltar por el propulsor
         if (other.CompareTag("Propulsor"))
         {
-            EfectoVelocidad = true;
+            CamaraCM.EfectoVelocidad = true;
             Velocidad_Movimiento = 90000;
         }
         //Desactiva la camara para que no siga la pelota
@@ -185,9 +165,16 @@ public class Ball_Movement : MonoBehaviour
         if(Explota)
         {
             Instantiate(Explocion, transform.position, Quaternion.Euler (-90,0,0));
+            CamaraCM.AplitudTemblor = 10;
+            CamaraCM.EfectoTemblor = true;
             Explota = false;
             Coll.isTrigger = true;
             Desaparecer_Pelota();
+        }
+        if (collision.collider.CompareTag("Botella_Grande"))
+        {
+            CamaraCM.AplitudTemblor = 4;
+            CamaraCM.EfectoTemblor = true;
         }
     }
     public void Cambiar_Color()

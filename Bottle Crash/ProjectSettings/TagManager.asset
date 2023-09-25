@@ -16,6 +16,7 @@ TagManager:
   - Trampolin
   - Transportador
   - Limite_Final
+  - Botella_Grande
   layers:
   - Default
   - TransparentFX

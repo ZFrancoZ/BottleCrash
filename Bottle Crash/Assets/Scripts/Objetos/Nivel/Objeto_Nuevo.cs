@@ -9,7 +9,6 @@ public class Objeto_Nuevo : MonoBehaviour
     [SerializeField] private Renderer rend;
     [SerializeField] private Rigidbody Rb;
     private bool BotellasEnMovimiento;
-    [SerializeField] private bool ControlarMovimiento;
     private void Start()
     {
         rend.material = GameManager.current.MaterialBotella;
@@ -25,23 +24,20 @@ public class Objeto_Nuevo : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if(ControlarMovimiento)
+        if (Rb.velocity.magnitude > 0.1f)
         {
-            if (Rb.velocity.magnitude > 0.1f)
+            if (!BotellasEnMovimiento)
             {
-                if (!BotellasEnMovimiento)
-                {
-                    Controlador_Botellas.current.BotellasMoviendose++;
-                    BotellasEnMovimiento = true;
-                }
+                Controlador_Botellas.current.BotellasMoviendose++;
+                BotellasEnMovimiento = true;
             }
-            else
+        }
+        else
+        {
+            if (BotellasEnMovimiento)
             {
-                if (BotellasEnMovimiento)
-                {
-                    Controlador_Botellas.current.BotellasMoviendose--;
-                    BotellasEnMovimiento = false;
-                }
+                Controlador_Botellas.current.BotellasMoviendose--;
+                BotellasEnMovimiento = false;
             }
         }
     }
