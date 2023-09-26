@@ -230,15 +230,15 @@ public class Ball_Movement : MonoBehaviour
     }
     public void Seguir_Camino()
     {
-        rb.velocity = VelGuardada;
-        rb.angularVelocity = VelAngularGuardada;
+        if(GameManager.current.ObjetosDestruidos < GameManager.current.ObjetosADestruir)
+        {
+            rb.velocity = VelGuardada;
+            rb.angularVelocity = VelAngularGuardada;
+        }
         Teletransportador = false;
     }
     public void Desaparecer_Pelota()
-    {   if(GameManager.current.ObjetosADestruir == 0)
-        {
-            Desaparecio = false;
-        }    
+    {
         if(!Desaparecio)
         {
             Desaparecio = true;
@@ -274,7 +274,7 @@ public class Ball_Movement : MonoBehaviour
                 Paso_Rampa = false;
                 Controlador_UI.current.Sumar_Racha(0);
                 Controlador_Botellas.current.tiempoDeError = 0;
-                LeanTween.scale(gameObject, new Vector3(0.5f, 0.5f, 0.5f), 1.5f).setEaseOutSine().setOnComplete(() =>
+                LeanTween.scale(gameObject, new Vector3(0.5f, 0.5f, 0.5f), 1f).setEaseOutSine().setOnComplete(() =>
                 {
                     Canvas_Menu.SetActive(true);
                     PuedeTirar = true;

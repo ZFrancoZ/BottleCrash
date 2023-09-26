@@ -27,13 +27,16 @@ public class GameManager : MonoBehaviour
 
     public float VelocidadBarraProgreso;
     public Image BarraProgresoNivel;
-
+    public bool SistemaGuardado = true;
 
     private void Awake()
     {
         current = this;
         Material();
-        Nivel = PlayerPrefs.GetInt("Nivel_Actual", 1);
+        if(SistemaGuardado)
+        {
+            Nivel = PlayerPrefs.GetInt("Nivel_Actual", 1);
+        }
     }
     private void Start()
     {
@@ -64,8 +67,11 @@ public class GameManager : MonoBehaviour
         {
             //Pelota.PuedeTirar = false;
             Nivel++;
-            PlayerPrefs.SetInt("Nivel_Actual", Nivel);
-            PlayerPrefs.Save();
+            if(SistemaGuardado)
+            {
+                PlayerPrefs.SetInt("Nivel_Actual", Nivel);
+                PlayerPrefs.Save();
+            }
             Invoke("Nivel_Completado", 2f);
         }
     }
