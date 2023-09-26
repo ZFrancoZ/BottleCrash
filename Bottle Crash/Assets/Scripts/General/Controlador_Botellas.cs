@@ -7,6 +7,7 @@ public class Controlador_Botellas : MonoBehaviour
     public static Controlador_Botellas current;
     public int BotellasMoviendose;
     public float tiempoTranscurrido = 0f;
+    public float tiempoDeError;
     private float tiempoEspera = 5f;
     [SerializeField] private Ball_Movement Pelota;
     private void Awake()
@@ -20,7 +21,11 @@ public class Controlador_Botellas : MonoBehaviour
             if(Pelota.Desaparecio)
             {
                 if(BotellasMoviendose > 0)
-            {
+                {
+                    if(tiempoDeError > 0)
+                    {
+                        tiempoDeError = 0;
+                    }
                     tiempoTranscurrido += Time.deltaTime; // Sumar el tiempo transcurrido en cada frame
 
                     if (tiempoTranscurrido >= tiempoEspera)
@@ -31,14 +36,19 @@ public class Controlador_Botellas : MonoBehaviour
                         tiempoTranscurrido = 0;
                     }
                 }
-            else
+                else
                 {
                     if (tiempoTranscurrido > 0)
                     {
-                        Debug.Log("B");
-                        //Invoke("Aparecer_Pelota", 1);
-                        Aparecer_Desaparecer();
-                        tiempoTranscurrido = 0;
+                        tiempoDeError += Time.deltaTime;// Sumar el tiempo desde que no se mueve nada
+                        if (tiempoDeError >= 1)
+                        {
+                            Debug.Log("B");
+                            //Invoke("Aparecer_Pelota", 1);
+                            Aparecer_Desaparecer();
+                            tiempoTranscurrido = 0;
+                            tiempoDeError = 0;
+                        }
                     }
                 }
             }
@@ -51,8 +61,11 @@ public class Controlador_Botellas : MonoBehaviour
         {
             //if (Pelota.Desaparecio)
             //{
-            Debug.Log("C");
+            if(BotellasMoviendose < 1)
+            {
+                Debug.Log("C");
                 Pelota.Aparecer_Pelota();
+            }
             //}
         }
     }

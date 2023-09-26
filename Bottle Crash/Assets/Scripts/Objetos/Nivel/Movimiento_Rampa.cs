@@ -7,6 +7,7 @@ public class Movimiento_Rampa : MonoBehaviour
     [SerializeField] private bool Mover;
     [SerializeField] private float Distancia;
     [SerializeField] private float Velocidad;
+    public float Impulso;
     private Ball_Movement Pelota;
     private void Start()
     {

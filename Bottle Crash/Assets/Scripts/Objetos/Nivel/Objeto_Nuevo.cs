@@ -24,7 +24,7 @@ public class Objeto_Nuevo : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (Rb.velocity.magnitude > 0.1f)
+        if (Rb.velocity.magnitude > 0.05f)
         {
             if (!BotellasEnMovimiento)
             {

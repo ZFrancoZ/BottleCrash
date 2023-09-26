@@ -435,10 +435,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7028744241077513977}
     m_Modifications:
+    - target: {fileID: 246477834220777983, guid: b8247d9278b51eb458db9af6cbbf5cad,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: a098d54a47881c04d80951974ad1a37e,
+        type: 2}
     - target: {fileID: 735492598935258181, guid: b8247d9278b51eb458db9af6cbbf5cad,
         type: 3}
       propertyPath: m_Name
       value: Suelo (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 735492598935258181, guid: b8247d9278b51eb458db9af6cbbf5cad,
+        type: 3}
+      propertyPath: m_TagString
+      value: Borde
       objectReference: {fileID: 0}
     - target: {fileID: 6738575148391765344, guid: b8247d9278b51eb458db9af6cbbf5cad,
         type: 3}
@@ -771,6 +782,12 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7028744241077513977}
     m_Modifications:
+    - target: {fileID: 246477834220777983, guid: b8247d9278b51eb458db9af6cbbf5cad,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: a098d54a47881c04d80951974ad1a37e,
+        type: 2}
     - target: {fileID: 735492598935258181, guid: b8247d9278b51eb458db9af6cbbf5cad,
         type: 3}
       propertyPath: m_Name
@@ -779,7 +796,7 @@ PrefabInstance:
     - target: {fileID: 735492598935258181, guid: b8247d9278b51eb458db9af6cbbf5cad,
         type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Borde
       objectReference: {fileID: 0}
     - target: {fileID: 6738575148391765344, guid: b8247d9278b51eb458db9af6cbbf5cad,
         type: 3}
@@ -865,6 +882,12 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7028744241077513977}
     m_Modifications:
+    - target: {fileID: 246477834220777983, guid: b8247d9278b51eb458db9af6cbbf5cad,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: a098d54a47881c04d80951974ad1a37e,
+        type: 2}
     - target: {fileID: 735492598935258181, guid: b8247d9278b51eb458db9af6cbbf5cad,
         type: 3}
       propertyPath: m_Name
@@ -873,7 +896,7 @@ PrefabInstance:
     - target: {fileID: 735492598935258181, guid: b8247d9278b51eb458db9af6cbbf5cad,
         type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Borde
       objectReference: {fileID: 0}
     - target: {fileID: 6738575148391765344, guid: b8247d9278b51eb458db9af6cbbf5cad,
         type: 3}
@@ -1779,6 +1802,12 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7028744241077513977}
     m_Modifications:
+    - target: {fileID: 246477834220777983, guid: b8247d9278b51eb458db9af6cbbf5cad,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: a098d54a47881c04d80951974ad1a37e,
+        type: 2}
     - target: {fileID: 735492598935258181, guid: b8247d9278b51eb458db9af6cbbf5cad,
         type: 3}
       propertyPath: m_Name
@@ -1787,7 +1816,7 @@ PrefabInstance:
     - target: {fileID: 735492598935258181, guid: b8247d9278b51eb458db9af6cbbf5cad,
         type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Borde
       objectReference: {fileID: 0}
     - target: {fileID: 6738575148391765344, guid: b8247d9278b51eb458db9af6cbbf5cad,
         type: 3}
@@ -1947,10 +1976,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7028744241077513977}
     m_Modifications:
+    - target: {fileID: 246477834220777983, guid: b8247d9278b51eb458db9af6cbbf5cad,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: a098d54a47881c04d80951974ad1a37e,
+        type: 2}
     - target: {fileID: 735492598935258181, guid: b8247d9278b51eb458db9af6cbbf5cad,
         type: 3}
       propertyPath: m_Name
       value: Suelo (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 735492598935258181, guid: b8247d9278b51eb458db9af6cbbf5cad,
+        type: 3}
+      propertyPath: m_TagString
+      value: Borde
       objectReference: {fileID: 0}
     - target: {fileID: 6738575148391765344, guid: b8247d9278b51eb458db9af6cbbf5cad,
         type: 3}

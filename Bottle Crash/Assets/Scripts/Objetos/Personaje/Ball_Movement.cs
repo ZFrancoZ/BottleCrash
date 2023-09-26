@@ -19,7 +19,8 @@ public class Ball_Movement : MonoBehaviour
 
     [SerializeField] private TrailRenderer Trail;
 
-    private Vector2 touchInicio;
+    //private Vector2 touchInicio;
+    private float touchInicio;
     [SerializeField] private bool Toca = false;
     public bool PuedeTirar;
     public bool EstaLaPelota;
@@ -49,20 +50,31 @@ public class Ball_Movement : MonoBehaviour
             {
                 Canvas_Menu.SetActive(false);
                 Touch touch = Input.GetTouch(0);
+
                 if (!Toca)
                 {
                     Toca = true;
-                    touchInicio = touch.position;
+                    touchInicio = touch.position.x; // Guarda solo la posición en el eje X
                 }
 
-                Vector2 deltaPos = touch.position - touchInicio;
+                float deltaPosX = touch.position.x - touchInicio;
 
-                // Calcula la velocidad en función de la distancia horizontal (deltaPosition.x)
-                float velocidadHorizontal = deltaPos.x * Velocidad_Colocación * Time.deltaTime;
+                // Define la distancia máxima permitida antes de que el objeto se mueva en el eje X
+                float distanciaMaximaPermitidaX = 50.0f; // Ajusta este valor según tus necesidades
 
-                // Aplica la velocidad al objeto en el eje X
-                Vector3 movimiento = new Vector3(velocidadHorizontal, 0, 0);
-                rb.velocity = movimiento;
+                if (Mathf.Abs(deltaPosX) <= distanciaMaximaPermitidaX)
+                {
+                    // No aplicamos velocidad en el eje X si no nos hemos movido más allá de la distancia máxima permitida
+                    rb.velocity = new Vector3(0, rb.velocity.y, rb.velocity.z);
+                }
+                else
+                {
+                    // Calcula la velocidad en función de la distancia horizontal (deltaPosX)
+                    float velocidadHorizontal = deltaPosX * Velocidad_Colocación * Time.deltaTime;
+
+                    // Aplica la velocidad al objeto solo en el eje X
+                    rb.velocity = new Vector3(velocidadHorizontal, rb.velocity.y, rb.velocity.z);
+                }
             }
             else
             {
@@ -72,25 +84,12 @@ public class Ball_Movement : MonoBehaviour
                     Soltar();
                 }
             }
-        }
-        /*else
-        {
 
-            Vector3 movimiento = (Vector3.forward * Velocidad_Movimiento * Time.deltaTime);
-            if (rb.velocity.magnitude <= Velocidad_Minima && Paso_Rampa && !Teletransportador)
-            {
-                Invoke("Desaparecer_Pelota", 0.2f);
-                //Desaparecer_Pelota();
-            }
-            else
-            {
-                rb.AddForce(movimiento);
-            }
-        }*/
+        }
         else
         {
 
-            Vector3 movimiento = ( new Vector3(Random.Range(-0.5f,0.5f),0,1) * Velocidad_Movimiento * Time.deltaTime);
+            Vector3 movimiento = (Vector3.forward * Velocidad_Movimiento * Time.deltaTime);
             if (rb.velocity.magnitude <= Velocidad_Minima && Paso_Rampa && !Teletransportador)
             {
                 Invoke("Desaparecer_Pelota", 0.2f);
@@ -122,7 +121,7 @@ public class Ball_Movement : MonoBehaviour
         if (other.CompareTag("Propulsor"))
         {
             CamaraCM.EfectoVelocidad = true;
-            Velocidad_Movimiento = 90000;
+            Velocidad_Movimiento = other.GetComponent<Movimiento_Rampa>().Impulso;
         }
         //Desactiva la camara para que no siga la pelota
         if (other.CompareTag("Fin Camara"))
@@ -236,7 +235,10 @@ public class Ball_Movement : MonoBehaviour
         Teletransportador = false;
     }
     public void Desaparecer_Pelota()
-    {
+    {   if(GameManager.current.ObjetosADestruir == 0)
+        {
+            Desaparecio = false;
+        }    
         if(!Desaparecio)
         {
             Desaparecio = true;
@@ -270,6 +272,8 @@ public class Ball_Movement : MonoBehaviour
                 camaraActivada = true;
                 Coll.isTrigger = false;
                 Paso_Rampa = false;
+                Controlador_UI.current.Sumar_Racha(0);
+                Controlador_Botellas.current.tiempoDeError = 0;
                 LeanTween.scale(gameObject, new Vector3(0.5f, 0.5f, 0.5f), 1.5f).setEaseOutSine().setOnComplete(() =>
                 {
                     Canvas_Menu.SetActive(true);

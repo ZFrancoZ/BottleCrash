@@ -33,6 +33,11 @@ public class GameManager : MonoBehaviour
     {
         current = this;
         Material();
+        Nivel = PlayerPrefs.GetInt("Nivel_Actual", 1);
+    }
+    private void Start()
+    {
+        Spawn_Escenario.current.Spawn();
     }
     void Update()
     {
@@ -59,6 +64,8 @@ public class GameManager : MonoBehaviour
         {
             //Pelota.PuedeTirar = false;
             Nivel++;
+            PlayerPrefs.SetInt("Nivel_Actual", Nivel);
+            PlayerPrefs.Save();
             Invoke("Nivel_Completado", 2f);
         }
     }
@@ -69,6 +76,7 @@ public class GameManager : MonoBehaviour
         Pelota.Desaparecer_Pelota();
         BarraProgresoNivel.fillAmount = 0;
         Canvas_Nivel.SetActive(true);
+        Controlador_UI.current.Sumar_Racha(0);
         Tirostxt.text = Pelota.CantidadDeTiros.ToString();
         FinPartida.Invoke();
         Material();

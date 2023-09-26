@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6397746344013017266}
   m_Layer: 0
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: Bumper
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -67,6 +67,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Objeto: {fileID: 8351847459643624309}
+  Ball: {fileID: 0}
 --- !u!1001 &9162240093875058212
 PrefabInstance:
   m_ObjectHideFlags: 0

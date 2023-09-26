@@ -18,6 +18,8 @@ TagManager:
   - Limite_Final
   - Botella_Grande
   - Barra
+  - Bumper
+  - Borde
   layers:
   - Default
   - TransparentFX

@@ -19,6 +19,6 @@ public class Texto_Nivel : MonoBehaviour
     public void Cambiar_Texto()
     {
         TxtNivel.text ="Nivel " + GameManager.current.Nivel.ToString();
-        LeanTween.scale(gameObject,new Vector3(1.5f,1.5f,1), 1).setEaseOutSine().setLoopPingPong(1);
+        LeanTween.scale(gameObject,new Vector3(1.5f,1.5f,1), 1).setEaseInOutBack().setLoopPingPong(1);
     }
 }

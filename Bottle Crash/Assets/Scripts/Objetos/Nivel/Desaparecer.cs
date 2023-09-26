@@ -11,6 +11,7 @@ public class Desaparecer : MonoBehaviour
     public float upwardsModifier = 0.0f;
     void Start()
     {
+        Controlador_UI.current.Sumar_Racha(1);
         /*Rb = GetComponent<Rigidbody>();
         // Encuentra todos los objetos dentro del radio de la explosión
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);

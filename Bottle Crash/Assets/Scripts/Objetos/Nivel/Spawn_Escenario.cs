@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class Spawn_Escenario : MonoBehaviour
 {
+    public static Spawn_Escenario current;
     public GameObject[] Escenario;
-    void Start()
+    private void Awake()
     {
-        Spawn();
+        current = this;
     }
 
     public void Spawn()
