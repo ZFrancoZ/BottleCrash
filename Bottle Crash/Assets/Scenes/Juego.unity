@@ -819,7 +819,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Camara: {fileID: 1368946026}
-  Nivel: 7
+  Nivel: 1
   ObjetosADestruir: 0
   ObjetosDestruidos: 0
   MaterialBotella: {fileID: 0}
@@ -831,7 +831,7 @@ MonoBehaviour:
   HizoPrimerTiro: 0
   VelocidadBarraProgreso: 1.5
   BarraProgresoNivel: {fileID: 889711727}
-  SistemaGuardado: 0
+  SistemaGuardado: 1
 --- !u!4 &405826689
 Transform:
   m_ObjectHideFlags: 0
@@ -2550,7 +2550,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.35
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -7656,7 +7656,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 4e-10
+  m_Time: 0.5
   m_PreviewTimeScale: 0
   m_Parameters:
     serializedVersion: 3
