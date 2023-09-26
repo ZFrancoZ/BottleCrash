@@ -8,6 +8,7 @@ public class Ball_Movement : MonoBehaviour
     private Rigidbody rb;
     public float Velocidad_Movimiento;
     public float AlturaSalto;
+    public int CantidadDeTiros;
     [SerializeField] private float Velocidad_Minima;
     [SerializeField] private float Velocidad_Colocación;
     private bool camaraActivada = true;
@@ -31,6 +32,8 @@ public class Ball_Movement : MonoBehaviour
     [SerializeField] private bool Teletransportador;
     [SerializeField] private Vector3 VelGuardada;
     [SerializeField] private Vector3 VelAngularGuardada;
+    [SerializeField] GameObject Particulas;
+    [SerializeField] private bool PrimerToqueSuelo;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -63,7 +66,6 @@ public class Ball_Movement : MonoBehaviour
             }
             else
             {
-                // Si no hay toques, establece la velocidad en cero en el eje X
                 if (Toca)
                 {
                     Toca = false;
@@ -71,21 +73,33 @@ public class Ball_Movement : MonoBehaviour
                 }
             }
         }
+        /*else
+        {
+
+            Vector3 movimiento = (Vector3.forward * Velocidad_Movimiento * Time.deltaTime);
+            if (rb.velocity.magnitude <= Velocidad_Minima && Paso_Rampa && !Teletransportador)
+            {
+                Invoke("Desaparecer_Pelota", 0.2f);
+                //Desaparecer_Pelota();
+            }
+            else
+            {
+                rb.AddForce(movimiento);
+            }
+        }*/
         else
         {
-            //if (Paso_Rampa)
-            //{
-                Vector3 movimiento = (Vector3.forward * Velocidad_Movimiento * Time.deltaTime);
-                if (rb.velocity.magnitude <= Velocidad_Minima && Paso_Rampa && !Teletransportador)
-                {
-                    Invoke("Desaparecer_Pelota", 0.2f);
-                    //Desaparecer_Pelota();
-                }
-                else
-                {
-                    rb.AddForce(movimiento);
-                }
-            //}
+
+            Vector3 movimiento = ( new Vector3(Random.Range(-0.5f,0.5f),0,1) * Velocidad_Movimiento * Time.deltaTime);
+            if (rb.velocity.magnitude <= Velocidad_Minima && Paso_Rampa && !Teletransportador)
+            {
+                Invoke("Desaparecer_Pelota", 0.2f);
+                //Desaparecer_Pelota();
+            }
+            else
+            {
+                rb.AddForce(movimiento);
+            }
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -95,11 +109,6 @@ public class Ball_Movement : MonoBehaviour
         if (other.CompareTag("Rampa") /*&& SeSolto*/)
         {
             Velocidad_Movimiento = 11000;
-        }
-        //Le agrega velocidad a la caida sobre la rampa
-        if (other.CompareTag("Trampolin"))
-        {
-            rb.velocity = new Vector3(rb.velocity.x, AlturaSalto, rb.velocity.z);
         }
         if(other.CompareTag("Transportador"))
         {
@@ -116,7 +125,6 @@ public class Ball_Movement : MonoBehaviour
             Velocidad_Movimiento = 90000;
         }
         //Desactiva la camara para que no siga la pelota
-
         if (other.CompareTag("Fin Camara"))
         {
             if (camaraActivada)
@@ -175,6 +183,18 @@ public class Ball_Movement : MonoBehaviour
         {
             CamaraCM.AplitudTemblor = 4;
             CamaraCM.EfectoTemblor = true;
+        }
+        if(collision.collider.CompareTag("Suelo"))
+        {
+            if(PrimerToqueSuelo)
+            {
+                Particulas.transform.position = this.gameObject.transform.position;
+                Particulas.GetComponent<ParticleSystem>().Play();
+            }
+            else
+            {
+                PrimerToqueSuelo = true;
+            }
         }
     }
     public void Cambiar_Color()
@@ -255,12 +275,14 @@ public class Ball_Movement : MonoBehaviour
                     Canvas_Menu.SetActive(true);
                     PuedeTirar = true;
                     Desaparecio = false;
+                    PrimerToqueSuelo = false;
                 });
             }
         }
     }
     public void Soltar()
     {
+        CantidadDeTiros++;
         PuedeTirar = false;
         if (!GameManager.current.HizoPrimerTiro)
         {

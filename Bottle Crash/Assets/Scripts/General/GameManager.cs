@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 using System;
 
 public class GameManager : MonoBehaviour
@@ -20,7 +21,7 @@ public class GameManager : MonoBehaviour
     public static event Action FinPartida;
 
     public GameObject Canvas_Nivel;
-
+    public TextMeshProUGUI Tirostxt;
     public Ball_Movement Pelota;
     public bool HizoPrimerTiro;
 
@@ -68,9 +69,11 @@ public class GameManager : MonoBehaviour
         Pelota.Desaparecer_Pelota();
         BarraProgresoNivel.fillAmount = 0;
         Canvas_Nivel.SetActive(true);
+        Tirostxt.text = Pelota.CantidadDeTiros.ToString();
         FinPartida.Invoke();
         Material();
         Camara.Cambiar_Objetivo(1);
         HizoPrimerTiro = false;
+        Pelota.CantidadDeTiros = 0;
     }
 }
