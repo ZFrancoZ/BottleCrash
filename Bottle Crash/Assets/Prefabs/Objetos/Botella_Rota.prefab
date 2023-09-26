@@ -1031,6 +1031,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 3180852137739085868}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e4882aa1014a20a4cabb03a84b8a81d2,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6273251503371418424}
     - targetCorrespondingSourceObject: {fileID: 3953215917983206005, guid: e4882aa1014a20a4cabb03a84b8a81d2,
         type: 3}
       insertIndex: -1
@@ -1351,6 +1355,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rend: {fileID: 0}
+  shrinkSpeed: 0.1
 --- !u!1 &1309554062086319517 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -2432558572190363362, guid: e4882aa1014a20a4cabb03a84b8a81d2,
@@ -1418,6 +1423,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rend: {fileID: 0}
+  shrinkSpeed: 0.1
 --- !u!1 &2931481142268023343 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7259554349996863148, guid: e4882aa1014a20a4cabb03a84b8a81d2,
@@ -1485,6 +1491,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rend: {fileID: 0}
+  shrinkSpeed: 0.1
 --- !u!1 &3077461432674447266 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -1827055753344167135, guid: e4882aa1014a20a4cabb03a84b8a81d2,
@@ -1552,6 +1559,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rend: {fileID: 0}
+  shrinkSpeed: 0.1
 --- !u!1 &3306257907785774971 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -2165219139840013320, guid: e4882aa1014a20a4cabb03a84b8a81d2,
@@ -1619,6 +1627,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rend: {fileID: 0}
+  shrinkSpeed: 0.1
 --- !u!1 &3747341581344162191 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -571794465128055540, guid: e4882aa1014a20a4cabb03a84b8a81d2,
@@ -1686,6 +1695,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rend: {fileID: 0}
+  shrinkSpeed: 0.1
 --- !u!1 &3849591423098075119 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -468981677713618068, guid: e4882aa1014a20a4cabb03a84b8a81d2,
@@ -1753,6 +1763,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rend: {fileID: 0}
+  shrinkSpeed: 0.1
 --- !u!1 &3890352487638358292 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -437721766032448105, guid: e4882aa1014a20a4cabb03a84b8a81d2,
@@ -1820,6 +1831,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rend: {fileID: 0}
+  shrinkSpeed: 0.1
 --- !u!1 &4670445530992411090 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: e4882aa1014a20a4cabb03a84b8a81d2,
@@ -1836,6 +1848,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 94f5764dc6f9da145828f75c742d70ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BotellasEnMovimiento: 0
+  explosionRadius: 4
+  explosionForce: 120
+  upwardsModifier: 0
+--- !u!114 &6273251503371418424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4670445530992411090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8602c77b077c1e438d94f14eeae5fb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5113485101016917247 stripped
@@ -1905,6 +1933,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rend: {fileID: 0}
+  shrinkSpeed: 0.1
 --- !u!1 &5476047553765011817 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8651559356764041750, guid: e4882aa1014a20a4cabb03a84b8a81d2,
@@ -1972,6 +2001,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rend: {fileID: 0}
+  shrinkSpeed: 0.1
 --- !u!1 &5785479228542818059 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -7179988971254830200, guid: e4882aa1014a20a4cabb03a84b8a81d2,
@@ -2039,6 +2069,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rend: {fileID: 0}
+  shrinkSpeed: 0.1
 --- !u!1 &6038077060598917040 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2295190660166114099, guid: e4882aa1014a20a4cabb03a84b8a81d2,
@@ -2106,6 +2137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rend: {fileID: 0}
+  shrinkSpeed: 0.1
 --- !u!1 &6213375761000433196 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -7337506239390926161, guid: e4882aa1014a20a4cabb03a84b8a81d2,
@@ -2173,6 +2205,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rend: {fileID: 0}
+  shrinkSpeed: 0.1
 --- !u!1 &7044201419061638295 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -5921196152297322476, guid: e4882aa1014a20a4cabb03a84b8a81d2,
@@ -2240,6 +2273,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rend: {fileID: 0}
+  shrinkSpeed: 0.1
 --- !u!1 &7367422298384772686 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -6183443194482257203, guid: e4882aa1014a20a4cabb03a84b8a81d2,
@@ -2307,6 +2341,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rend: {fileID: 0}
+  shrinkSpeed: 0.1
 --- !u!1 &7537166800851078957 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -6590791678405594194, guid: e4882aa1014a20a4cabb03a84b8a81d2,
@@ -2374,6 +2409,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rend: {fileID: 0}
+  shrinkSpeed: 0.1
 --- !u!1 &7641992069865701081 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2746184130346762842, guid: e4882aa1014a20a4cabb03a84b8a81d2,
@@ -2441,6 +2477,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rend: {fileID: 0}
+  shrinkSpeed: 0.1
 --- !u!1 &8166140317094194847 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -4809178111005093348, guid: e4882aa1014a20a4cabb03a84b8a81d2,
@@ -2508,6 +2545,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rend: {fileID: 0}
+  shrinkSpeed: 0.1
 --- !u!1 &8240738915143362066 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -4734034419381462383, guid: e4882aa1014a20a4cabb03a84b8a81d2,
@@ -2575,6 +2613,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rend: {fileID: 0}
+  shrinkSpeed: 0.1
 --- !u!1 &8621759667615488167 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -4920450761758677980, guid: e4882aa1014a20a4cabb03a84b8a81d2,
@@ -2642,6 +2681,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rend: {fileID: 0}
+  shrinkSpeed: 0.1
 --- !u!1 &8848742348014696182 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3953215917983206005, guid: e4882aa1014a20a4cabb03a84b8a81d2,
@@ -2709,3 +2749,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rend: {fileID: 0}
+  shrinkSpeed: 0.1

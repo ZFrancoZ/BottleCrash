@@ -17,6 +17,7 @@ TagManager:
   - Transportador
   - Limite_Final
   - Botella_Grande
+  - Barra
   layers:
   - Default
   - TransparentFX

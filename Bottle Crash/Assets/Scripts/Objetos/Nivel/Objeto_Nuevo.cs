@@ -47,10 +47,6 @@ public class Objeto_Nuevo : MonoBehaviour
         {
             YaEntro = true;
             GameManager.current.Sumar_Destruido();
-            /*if (BotellasEnMovimiento)
-            {
-                Controlador_Botellas.current.BotellasMoviendose--;
-            }*/
             GameObject objetoInstanciado = Instantiate(Botella_Rota, transform.position, Quaternion.identity);
             objetoInstanciado.transform.localScale = transform.localScale;
             objetoInstanciado.GetComponent<Desaparecer>().BotellasEnMovimiento = BotellasEnMovimiento;

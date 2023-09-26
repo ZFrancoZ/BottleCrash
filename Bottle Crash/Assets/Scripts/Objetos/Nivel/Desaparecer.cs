@@ -4,20 +4,35 @@ using UnityEngine;
 
 public class Desaparecer : MonoBehaviour
 {
+    private Rigidbody Rb;
     public bool BotellasEnMovimiento;
+    public float explosionRadius = 5.0f;
+    public float explosionForce = 1000.0f;
+    public float upwardsModifier = 0.0f;
     void Start()
     {
+        /*Rb = GetComponent<Rigidbody>();
+        // Encuentra todos los objetos dentro del radio de la explosión
+        Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
+
+        foreach (Collider hit in colliders)
+        {
+            // Intenta obtener un componente Rigidbody del objeto
+            Rigidbody rb = hit.GetComponent<Rigidbody>();
+
+            if (rb != null)
+            {
+                // Aplica una fuerza explosiva al Rigidbody
+                rb.AddExplosionForce(explosionForce, transform.position, explosionRadius, upwardsModifier);
+            }
+        }*/
         Invoke("Destruir", 0.5f);
     }
     private void Destruir()
     {
-        LeanTween.scale(gameObject, new Vector3(0, 0, 0),0.5f).setEaseOutSine().setOnComplete(() =>
-            {
-                if (BotellasEnMovimiento)
-                {
-                    Controlador_Botellas.current.BotellasMoviendose--;
-                }
-                Destroy(gameObject);
-            });
+        if (BotellasEnMovimiento)
+        {
+            Controlador_Botellas.current.BotellasMoviendose--;
+        }
     }
 }
